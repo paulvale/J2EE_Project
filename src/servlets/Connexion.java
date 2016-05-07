@@ -18,7 +18,6 @@ import forms.ConnexionForm;
 
 public class Connexion extends HttpServlet {    
     public static final String CONF_DAO_FACTORY = "daofactory";
-    //public static final String CHEMIN           = "chemin";
     public static final String ATT_USER         = "utilisateur";
     public static final String ATT_FORM         = "form";
 

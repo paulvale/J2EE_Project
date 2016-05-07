@@ -67,10 +67,7 @@ public final class DAOUtilitaire {
      */
     public static PreparedStatement initialisationRequetePreparee( Connection connexion, String sql, boolean returnGeneratedKeys, Object... objets ) throws SQLException {
         PreparedStatement preparedStatement = connexion.prepareStatement( sql, returnGeneratedKeys ? Statement.RETURN_GENERATED_KEYS : Statement.NO_GENERATED_KEYS );
-        System.out.println(objets.length);
         for ( int i = 0; i < objets.length; i++ ) {
-        	System.out.println(i);
-        	System.out.println(objets[i]);
             preparedStatement.setObject( i+1, objets[i] );
         }
         return preparedStatement;

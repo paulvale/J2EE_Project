@@ -7,15 +7,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import beans.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
-	private static final String SQL_SELECT_PAR_EMAIL = "SELECT id, email, password FROM Utilisateur WHERE email = ?";
+	private static final String SQL_SELECT_PAR_EMAIL = "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur WHERE email = ?";
 	private static final String SQL_INSERT 			 = "INSERT INTO Utilisateur (email, mot_de_passe, nom, date_inscription) VALUES (?, ?, ?, NOW())";
-	
 	
 	private DAOFactory          daoFactory;
 
@@ -90,6 +90,12 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         utilisateur.setId( resultSet.getLong( "id" ) );
         utilisateur.setEmail( resultSet.getString( "email" ) );
         utilisateur.setMotDePasse( resultSet.getString( "password" ) );
+        utilisateur.setActif(resultSet.getInt("actif") == 0 ? false : true);
+        utilisateur.setAdmin(resultSet.getInt("admin") == 0 ? false : true);
+        utilisateur.setCompany(resultSet.getString("company") );
+        utilisateur.setNom(resultSet.getString("lastname"));
+        utilisateur.setPrénom(resultSet.getString("firstname"));
+        utilisateur.setPhone(resultSet.getString("phone"));
         return utilisateur;
     }
 }

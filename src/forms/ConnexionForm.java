@@ -49,8 +49,6 @@ public final class ConnexionForm {
         try {
             if ( erreurs.isEmpty() ) {
                 Utilisateur utilisateurTrouveBDD = utilisateurDao.trouver( email );
-                System.out.println(utilisateurTrouveBDD.getMotDePasse());
-                System.out.println(utilisateur.getMotDePasse());
                 if(utilisateurTrouveBDD.getMotDePasse().equals(motDePasse)){
                 	resultat = "Succès de la connexion";
                 	utilisateur = utilisateurTrouveBDD;
