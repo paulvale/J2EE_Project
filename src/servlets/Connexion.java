@@ -21,8 +21,9 @@ public class Connexion extends HttpServlet {
     public static final String ATT_USER         = "utilisateur";
     public static final String ATT_FORM         = "form";
 
-    public static final String VUE_SUCCES       = "/WEB-INF/afficherClient.jsp";
-    public static final String VUE_FORM         = "/WEB-INF/connexion.jsp";
+    public static final String VUE_SUCCES_ADMIN       = "/WEB-INF/admin/afficherProfilAdmin.jsp";
+    public static final String VUE_SUCCES       	  = "/WEB-INF/utilisateur/afficherProfilUtilisateur.jsp";
+    public static final String VUE_FORM               = "/WEB-INF/connexion.jsp";
 
     private UtilisateurDao          utilisateurDao;
 
@@ -58,7 +59,12 @@ public class Connexion extends HttpServlet {
             /* Affichage de la vue de l'utilisateur
              * C'est ici que je vais pouvoir le rediriger vers l'une ou l'autre de mes pages
              *  */
-            this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
+        	if (utilisateur.getAdmin()){
+        		this.getServletContext().getRequestDispatcher( VUE_SUCCES_ADMIN ).forward( request, response );
+        	}else {
+        		this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
+        	}
+            
         } else {
             /* Sinon, ré-affichage du formulaire de création avec les erreurs */
             this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );
