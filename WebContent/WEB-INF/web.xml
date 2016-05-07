@@ -4,11 +4,19 @@
     	<servlet-name>Connexion</servlet-name>
     	<servlet-class>servlets.Connexion</servlet-class>
 	</servlet>
+	<servlet>
+        <servlet-name>CreationUtilisateur</servlet-name>
+        <servlet-class>servlets.CreationUtilisateur</servlet-class>
+    </servlet>
 
 	<servlet-mapping>
     	<servlet-name>Connexion</servlet-name>
     	<url-pattern>/connexion</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>CreationUtilisateur</servlet-name>
+        <url-pattern>/creationUtilisateur</url-pattern>
+    </servlet-mapping>
 	
     <filter>
         <filter-name>Set Character Encoding</filter-name>

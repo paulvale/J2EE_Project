@@ -15,7 +15,7 @@ import beans.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 	private static final String SQL_SELECT_PAR_EMAIL = "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur WHERE email = ?";
-	private static final String SQL_INSERT 			 = "INSERT INTO Utilisateur (email, mot_de_passe, nom, date_inscription) VALUES (?, ?, ?, NOW())";
+	private static final String SQL_INSERT 			 = "INSERT INTO Utilisateur (email, password, firstname, lastname, phone,company,actif,admin,createdAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 	
 	private DAOFactory          daoFactory;
 
@@ -59,7 +59,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, utilisateur.getEmail(), utilisateur.getMotDePasse(), utilisateur.getNom() );
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, utilisateur.getEmail(), utilisateur.getMotDePasse(), utilisateur.getPrenom(), utilisateur.getNom(), utilisateur.getPhone(), utilisateur.getCompany(), utilisateur.getActif(), utilisateur.getActif() );
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
             if ( statut == 0 ) {
@@ -94,7 +94,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         utilisateur.setAdmin(resultSet.getInt("admin") == 0 ? false : true);
         utilisateur.setCompany(resultSet.getString("company") );
         utilisateur.setNom(resultSet.getString("lastname"));
-        utilisateur.setPrénom(resultSet.getString("firstname"));
+        utilisateur.setPrenom(resultSet.getString("firstname"));
         utilisateur.setPhone(resultSet.getString("phone"));
         return utilisateur;
     }

@@ -7,7 +7,7 @@ public class Utilisateur {
     private Long      id;
     private String    email;
     private String    motDePasse;
-    private String	  prénom;
+    private String	  prenom;
     private String    nom;
     private Timestamp dateInscription;
     private Boolean	  admin;
@@ -32,11 +32,11 @@ public class Utilisateur {
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
-	public String getPrénom() {
-		return prénom;
+	public String getPrenom() {
+		return prenom;
 	}
-	public void setPrénom(String prénom) {
-		this.prénom = prénom;
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 	public String getNom() {
 		return nom;
