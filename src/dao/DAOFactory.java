@@ -75,7 +75,7 @@ public class DAOFactory {
      * Méthodes de récupération de l'implémentation des différents DAO
      * (uniquement deux dans le cadre de ce TP)
      */
-    public UtilisateurDao getClientDao() {
+    public UtilisateurDao getUtilisateurDao() {
         return new UtilisateurDaoImpl( this );
     }
 
