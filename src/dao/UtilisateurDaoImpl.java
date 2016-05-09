@@ -11,9 +11,12 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 import beans.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
+	private static final String SQL_SELECT = "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur ORDER BY id";
 	private static final String SQL_SELECT_PAR_EMAIL = "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur WHERE email = ?";
 	private static final String SQL_INSERT 			 = "INSERT INTO Utilisateur (email, password, firstname, lastname, phone,company,actif,admin,createdAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 	
@@ -79,6 +82,32 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
             fermeturesSilencieuses( valeursAutoGenerees, preparedStatement, connexion );
         }
     }
+    
+    /* Implémentation de la méthode définie dans l'interface ClientDao */
+    @Override
+    public List<Utilisateur> lister() throws DAOException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Utilisateur> clients = new ArrayList<Utilisateur>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = connection.prepareStatement( SQL_SELECT );
+            resultSet = preparedStatement.executeQuery();
+            while ( resultSet.next() ) {
+                clients.add( map( resultSet ) );
+            }
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connection );
+        }
+
+        return clients;
+    }
+    
+    
     
     /*
      * Simple méthode utilitaire permettant de faire la correspondance (le

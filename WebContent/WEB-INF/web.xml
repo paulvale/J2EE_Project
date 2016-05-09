@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
+	<session-config> 
+        <session-timeout>120</session-timeout>
+    </session-config>
+	
 	<servlet>
     	<servlet-name>Connexion</servlet-name>
     	<servlet-class>servlets.Connexion</servlet-class>
@@ -11,6 +15,10 @@
     <servlet>
         <servlet-name>AfficherProfilAdmin</servlet-name>
         <servlet-class>servlets.AfficherProfilAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListerUtilisateurs</servlet-name>
+    <servlet-class>servlets.ListerUtilisateurs</servlet-class>
     </servlet>
     <servlet>
     	<servlet-name>Deconnexion</servlet-name>
@@ -29,6 +37,10 @@
         <servlet-name>CreationUtilisateur</servlet-name>
         <url-pattern>/creationUtilisateur</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>ListerUtilisateurs</servlet-name>
+    	<url-pattern>/listerUtilisateurs</url-pattern>
+	</servlet-mapping>
     <servlet-mapping>
     	<servlet-name>Deconnexion</servlet-name>
     	<url-pattern>/deconnexion</url-pattern>
