@@ -4,18 +4,22 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Affichage d'un client</title>
+        <title>Affichage de votre profil administrateur</title>
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
     <body>
-        <c:import url="menuAdmin.jsp" />
+    	<c:import url="menuAdmin.jsp"/>
         <div id="corps">
-            <p class="info">${ form.resultat }</p>
-            <p>Nom : <c:out value="${ utilisateur.nom }"/></p>
-            <p>Prénom : <c:out value="${ utilisateur.prenom }"/></p>
-            <p>Companie : <c:out value="${ utilisateur.company }"/></p>
-            <p>Numéro de téléphone : <c:out value="${ utilisateur.phone }"/></p>
-            <p>Email : <c:out value="${ utilisateur.email }"/></p>
+            <p class="info"> Votre profil : </p>
+            <%-- Vérification de la présence d'un objet utilisateur en session --%>
+            <c:if test="${!empty utilisateurSession}">
+            	<%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+            	<p>Nom : <c:out value="${ utilisateurSession.nom }"/></p>
+            	<p>Prénom : <c:out value="${ utilisateurSession.prenom }"/></p>
+            	<p>Companie : <c:out value="${ utilisateurSession.company }"/></p>
+            	<p>Numéro de téléphone : <c:out value="${ utilisateurSession.phone }"/></p>
+            	<p>Email : <c:out value="${ utilisateurSession.email }"/></p>
+            </c:if>
         </div>
     </body>
 </html>

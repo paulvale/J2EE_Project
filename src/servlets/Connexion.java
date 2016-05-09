@@ -19,6 +19,7 @@ import forms.ConnexionForm;
 public class Connexion extends HttpServlet {    
     public static final String CONF_DAO_FACTORY = "daofactory";
     public static final String ATT_USER         = "utilisateur";
+    public static final String ATT_SESSION_USER = "utilisateurSession";
     public static final String ATT_FORM         = "form";
 
     public static final String VUE_SUCCES_ADMIN       = "/WEB-INF/admin/afficherProfilAdmin.jsp";
@@ -59,6 +60,20 @@ public class Connexion extends HttpServlet {
             /* Affichage de la vue de l'utilisateur
              * C'est ici que je vais pouvoir le rediriger vers l'une ou l'autre de mes pages
              *  */
+        	/* Récupération de la session depuis la requête */
+            HttpSession session = request.getSession();
+
+            /**
+             * Si aucune erreur de validation n'a eu lieu, alors ajout du bean
+             * Utilisateur à la session, sinon suppression du bean de la session.
+             */
+            if ( form.getErreurs().isEmpty() ) {
+                session.setAttribute( ATT_SESSION_USER, utilisateur );
+            } else {
+                session.setAttribute( ATT_SESSION_USER, null );
+            }
+        	
+        	
         	if (utilisateur.getAdmin()){
         		this.getServletContext().getRequestDispatcher( VUE_SUCCES_ADMIN ).forward( request, response );
         	}else {

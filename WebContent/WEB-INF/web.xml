@@ -8,15 +8,31 @@
         <servlet-name>CreationUtilisateur</servlet-name>
         <servlet-class>servlets.CreationUtilisateur</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AfficherProfilAdmin</servlet-name>
+        <servlet-class>servlets.AfficherProfilAdmin</servlet-class>
+    </servlet>
+    <servlet>
+    	<servlet-name>Deconnexion</servlet-name>
+    	<servlet-class>servlets.Deconnexion</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
     	<servlet-name>Connexion</servlet-name>
     	<url-pattern>/connexion</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
+        <servlet-name>AfficherProfilAdmin</servlet-name>
+        <url-pattern>/afficherProfilAdmin</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
         <servlet-name>CreationUtilisateur</servlet-name>
         <url-pattern>/creationUtilisateur</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Deconnexion</servlet-name>
+    	<url-pattern>/deconnexion</url-pattern>
+	</servlet-mapping>
 	
     <filter>
         <filter-name>Set Character Encoding</filter-name>
