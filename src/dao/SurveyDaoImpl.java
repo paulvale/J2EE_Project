@@ -17,7 +17,7 @@ import beans.Survey;
 
 public class SurveyDaoImpl implements SurveyDao 
 {
-	private static final String SURVEYACTIVE	  		= "Active";
+	private static final String SURVEYACTIVE	  		= "active";
 	
     private static final String SQL_SELECT        		= "SELECT id, sujet, actif, createdAt FROM questionnaire ORDER BY id";
     private static final String SQL_SELECT_BY_ID	 	= "SELECT id, sujet, actif, createdAt FROM questionnaire WHERE id = ?";
