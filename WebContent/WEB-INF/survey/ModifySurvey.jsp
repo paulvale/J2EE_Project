@@ -21,7 +21,7 @@
 					<br />
 					
                     <c:choose>
-						<c:when test="${ sessionScope.survey.active == 'Active'}">
+						<c:when test="${ sessionScope.survey.active == 'active'}">
 							<input type="radio" name="statusField" value="active" checked />  Actif
 							<input type="radio" name="statusField" value="inactive" /> Inactif<br>
 							<br />
