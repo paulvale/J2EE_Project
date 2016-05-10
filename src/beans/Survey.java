@@ -27,9 +27,9 @@ public class Survey
 	public String getActive()
 	{
 		if(m_bActive)
-			return "Active";
+			return "active";
 		else
-			return "Inactive";
+			return "inactive";
 	}
 	public void setActive(boolean bActive)
 	{
