@@ -78,6 +78,23 @@ public class DAOFactory {
     public UtilisateurDao getUtilisateurDao() {
         return new UtilisateurDaoImpl( this );
     }
+    
+    public SurveyDao getSurveyDao() 
+    {
+        return new SurveyDaoImpl( this );
+    }
+    
+    /*
+    public QuestionDao getQuestionDao() 
+    {
+        return new QuestionDaoImpl( this );
+    }
+    
+    public AnswerDao getAnswerDao() 
+    {
+        return new AnswerDaoImpl( this );
+    }
+    */
 
     /*public CommandeDao getCommandeDao() {
         return new CommandeDaoImpl( this );
