@@ -84,12 +84,12 @@ public class DAOFactory {
         return new SurveyDaoImpl( this );
     }
     
-    /*
+    
     public QuestionDao getQuestionDao() 
     {
         return new QuestionDaoImpl( this );
     }
-    
+    /*
     public AnswerDao getAnswerDao() 
     {
         return new AnswerDaoImpl( this );
