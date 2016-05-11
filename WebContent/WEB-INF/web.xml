@@ -24,91 +24,55 @@
     	<servlet-name>Deconnexion</servlet-name>
     	<servlet-class>servlets.Deconnexion</servlet-class>
 	</servlet>
-
-	<servlet-mapping>
-    	<servlet-name>Connexion</servlet-name>
-    	<url-pattern>/connexion</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-        <servlet-name>AfficherProfilAdmin</servlet-name>
-        <url-pattern>/afficherProfilAdmin</url-pattern>
-    </servlet-mapping>
-	<servlet-mapping>
-        <servlet-name>CreationUtilisateur</servlet-name>
-        <url-pattern>/creationUtilisateur</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-    	<servlet-name>ListerUtilisateurs</servlet-name>
-    	<url-pattern>/listerUtilisateurs</url-pattern>
-	</servlet-mapping>
-    <servlet-mapping>
-    	<servlet-name>Deconnexion</servlet-name>
-    	<url-pattern>/deconnexion</url-pattern>
-    </servlet-mapping>
-    
-    
-    <servlet>
-    	<servlet-name>Connexion</servlet-name>
-    	<servlet-class>servlets.Connexion</servlet-class>
-	</servlet>
 	<servlet>
-        <servlet-name>CreationUtilisateur</servlet-name>
-        <servlet-class>servlets.CreationUtilisateur</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AfficherProfilAdmin</servlet-name>
-        <servlet-class>servlets.AfficherProfilAdmin</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ListerUtilisateurs</servlet-name>
-    <servlet-class>servlets.ListerUtilisateurs</servlet-class>
-    </servlet>
-    <servlet>
-    	<servlet-name>Deconnexion</servlet-name>
-    	<servlet-class>servlets.Deconnexion</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-    	<servlet-name>Connexion</servlet-name>
-    	<url-pattern>/connexion</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-        <servlet-name>AfficherProfilAdmin</servlet-name>
-        <url-pattern>/afficherProfilAdmin</url-pattern>
-    </servlet-mapping>
-	<servlet-mapping>
-        <servlet-name>CreationUtilisateur</servlet-name>
-        <url-pattern>/creationUtilisateur</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-    	<servlet-name>ListerUtilisateurs</servlet-name>
-    	<url-pattern>/listerUtilisateurs</url-pattern>
-	</servlet-mapping>
-    <servlet-mapping>
-    	<servlet-name>Deconnexion</servlet-name>
-    	<url-pattern>/deconnexion</url-pattern>
-	</servlet-mapping>
-    
-    <servlet>
         <servlet-name>SurveyCreation</servlet-name>
         <servlet-class>servlets.SurveyCreation</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>SurveyCreation</servlet-name>
-        <url-pattern>/surveyCreation</url-pattern>
-    </servlet-mapping>
     <servlet>
         <servlet-name>SurveyList</servlet-name>
     	<servlet-class>servlets.SurveyList</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>SurveyList</servlet-name>
-        <url-pattern>/surveyList</url-pattern>
-    </servlet-mapping>
     <servlet>
         <servlet-name>SurveyDeletion</servlet-name>
         <servlet-class>servlets.SurveyDeletion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuestionCreation</servlet-name>
+        <servlet-class>servlets.QuestionCreation</servlet-class>
+    </servlet>
+   	<servlet>
+        <servlet-name>QuestionDisplay</servlet-name>
+        <servlet-class>servlets.QuestionDisplay</servlet-class>
+    </servlet>
+
+	<servlet-mapping>
+    	<servlet-name>Connexion</servlet-name>
+    	<url-pattern>/connexion</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>AfficherProfilAdmin</servlet-name>
+        <url-pattern>/afficherProfilAdmin</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>CreationUtilisateur</servlet-name>
+        <url-pattern>/creationUtilisateur</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>ListerUtilisateurs</servlet-name>
+    	<url-pattern>/listerUtilisateurs</url-pattern>
+	</servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Deconnexion</servlet-name>
+    	<url-pattern>/deconnexion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SurveyCreation</servlet-name>
+        <url-pattern>/surveyCreation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SurveyList</servlet-name>
+        <url-pattern>/surveyList</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SurveyDeletion</servlet-name>
         <url-pattern>/surveyDeletion</url-pattern>
@@ -129,28 +93,14 @@
         <servlet-name>SurveyModification</servlet-name>
         <url-pattern>/surveyModification</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>QuestionCreation</servlet-name>
-        <servlet-class>servlets.QuestionCreation</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>QuestionCreation</servlet-name>
         <url-pattern>/questionCreation</url-pattern>
     </servlet-mapping>
-	<servlet>
-        <servlet-name>QuestionDisplay</servlet-name>
-        <servlet-class>servlets.QuestionDisplay</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>QuestionDisplay</servlet-name>
         <url-pattern>/questionDisplay</url-pattern>
     </servlet-mapping>
-    
-    <filter-mapping>
-    	<filter-name>Set Character Encoding</filter-name>
-    	<url-pattern>/*</url-pattern>
-    </filter-mapping>
     
     <filter>
         <filter-name>PreloadingFilter</filter-name>
