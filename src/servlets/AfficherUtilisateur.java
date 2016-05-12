@@ -7,14 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.Utilisateur;
 import dao.DAOFactory;
 import dao.UtilisateurDao;
 
-public class SuppressionUtilisateur extends HttpServlet {
+public class AfficherUtilisateur extends HttpServlet {
 	public static final String CONF_DAO_FACTORY = "daofactory";
-    public static final String PARAM_NOM_UTILISATEUR = "idUtilisateur";
-
-    public static final String VUE              = "/listerUtilisateurs";
+    public static final String ATT_USER         = "utilisateur";
+    public static final String VUE              = "/WEB-INF/admin/afficherUtilisateur.jsp";
     
     private UtilisateurDao          utilisateurDao;
 
@@ -24,17 +24,14 @@ public class SuppressionUtilisateur extends HttpServlet {
     }
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        /* Récupération du paramètre */
-        String stringUtilisateur = getValeurParametre( request, PARAM_NOM_UTILISATEUR );
-        int idUtilisateur = Integer.parseInt(stringUtilisateur)
-        		;
-        /* On va supprimer la personne que l'on a recu en parametre */
-        utilisateurDao.supprimer(idUtilisateur);
-
-        /* Redirection vers la fiche récapitulative */
-        response.sendRedirect( request.getContextPath() + VUE );
+    		/* Récupération du paramètre */
+    		String emailUtilisateur = getValeurParametre( request, ATT_USER );
+        	Utilisateur utilisateur = utilisateurDao.trouver(emailUtilisateur);
+            
+            request.setAttribute( ATT_USER, utilisateur );	
+            this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }
-
+    
     /*
      * Méthode utilitaire qui retourne null si un paramètre est vide, et son
      * contenu sinon.

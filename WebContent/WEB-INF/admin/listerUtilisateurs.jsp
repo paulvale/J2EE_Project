@@ -23,7 +23,10 @@
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Entreprise</th>
-                    <th class="action">Action</th>                    
+                    <th>Actif</th>
+                    <th class="action">Modifier</th>
+                    <th class="action">Supprimer</th> 
+                    <th class="action">Informations</th>                   
                 </tr>
                 <%-- Parcours de la Map des clients en session, et utilisation de l'objet varStatus. --%>
                 <c:forEach items="${ listeUtilisateurs }" var="mapUtilisateurs" varStatus="boucle">
@@ -33,11 +36,35 @@
                     <td><c:out value="${ mapUtilisateurs.nom }"/></td>
                     <td><c:out value="${ mapUtilisateurs.prenom }"/></td>
                     <td><c:out value="${ mapUtilisateurs.company }"/></td>
+                    <td>
+                    	<c:choose>
+					    	<c:when test="${mapUtilisateurs.actif}">
+					    		<img src="<c:url value="/inc/actif.png"/>" alt="Actif" />
+					    	</c:when>
+					    	<c:otherwise>
+					    		<img src="<c:url value="/inc/inactif.png"/>" alt="Inactif" />
+					    	</c:otherwise>
+						</c:choose>
+                    </td>
+                    
+                    <%-- Lien vers la servlet de modification, avec passage de l'id de l'utilisateur - en paramètre grâce à la balise <c:param/>. --%>
+                    <td class="action">
+                        <a href="<c:url value=""><c:param name="profilUtilisateur" value="${ mapUtilisateurs.id }" /></c:url>">
+                            <img src="<c:url value="/inc/modifier.png"/>" alt="Modifier" />
+                        </a>
+                    </td>
 
-                    <%-- Lien vers la servlet de suppression, avec passage du nom du client - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
+                    <%-- Lien vers la servlet de suppression, avec passage de l'id de l'utilisateur - en paramètre grâce à la balise <c:param/>. --%>
                     <td class="action">
                         <a href="<c:url value="/suppressionUtilisateur"><c:param name="idUtilisateur" value="${ mapUtilisateurs.id }" /></c:url>">
                             <img src="<c:url value="/inc/supprimer.png"/>" alt="Supprimer" />
+                        </a>
+                    </td>
+                    
+                    <%-- Lien vers la servlet d'information, avec passage de l'id de l'utilisateur - en paramètre grâce à la balise <c:param/>. --%>
+                    <td class="action">
+                        <a href="<c:url value="/afficherUtilisateur"><c:param name="utilisateur" value="${ mapUtilisateurs.email }" /></c:url>">
+                            <img src="<c:url value="/inc/info.png"/>" alt="Info" />
                         </a>
                     </td>
                 </tr>
