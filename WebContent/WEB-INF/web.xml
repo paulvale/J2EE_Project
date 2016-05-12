@@ -29,6 +29,10 @@
     <servlet-class>servlets.AfficherUtilisateur</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ModificationUtilisateur</servlet-name>
+        <servlet-class>servlets.ModificationUtilisateur</servlet-class>
+    </servlet>
+    <servlet>
     	<servlet-name>Deconnexion</servlet-name>
     	<servlet-class>servlets.Deconnexion</servlet-class>
 	</servlet>
@@ -77,6 +81,10 @@
     <servlet-mapping>
         <servlet-name>AfficherUtilisateur</servlet-name>
         <url-pattern>/afficherUtilisateur</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModificationUtilisateur</servlet-name>
+        <url-pattern>/modificationUtilisateur</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>Deconnexion</servlet-name>

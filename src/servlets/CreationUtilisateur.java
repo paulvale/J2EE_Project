@@ -18,7 +18,7 @@ public class CreationUtilisateur extends HttpServlet {
     public static final String ATT_FORM         = "form";
     public static final String SESSION_CLIENTS  = "clients";
 
-    public static final String VUE_SUCCES       = "/WEB-INF/afficherClient.jsp";
+    public static final String VUE_SUCCES       = "/listerUtilisateurs";
     public static final String VUE_FORM         = "/WEB-INF/admin/creerUtilisateur.jsp";
 
     private UtilisateurDao          utilisateurDao;
@@ -37,7 +37,6 @@ public class CreationUtilisateur extends HttpServlet {
         /* Préparation de l'objet formulaire */
         CreationUtilisateurForm form = new CreationUtilisateurForm( utilisateurDao );
         
-
         /* Traitement de la requête et récupération du bean en résultant */
         Utilisateur utilisateur = form.creerUtilisateur( request );
 
@@ -49,7 +48,8 @@ public class CreationUtilisateur extends HttpServlet {
         if ( form.getErreurs().isEmpty() ) {
 
             /* Affichage de la fiche récapitulative */
-            this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
+        	/* Redirection vers la fiche récapitulative */
+            response.sendRedirect( request.getContextPath() + VUE_SUCCES );
         } else {
             /* Sinon, ré-affichage du formulaire de création avec les erreurs */
             this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );

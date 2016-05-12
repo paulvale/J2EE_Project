@@ -49,7 +49,7 @@
                     
                     <%-- Lien vers la servlet de modification, avec passage de l'id de l'utilisateur - en paramètre grâce à la balise <c:param/>. --%>
                     <td class="action">
-                        <a href="<c:url value=""><c:param name="profilUtilisateur" value="${ mapUtilisateurs.id }" /></c:url>">
+                        <a href="<c:url value="/modificationUtilisateur"><c:param name="utilisateur" value="${ mapUtilisateurs.email }" /></c:url>">
                             <img src="<c:url value="/inc/modifier.png"/>" alt="Modifier" />
                         </a>
                     </td>

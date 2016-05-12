@@ -13,7 +13,7 @@
         <div>
             <form method="post" action="<c:url value="/creationUtilisateur"/>">
                <fieldset>
-                    <legend>Informations Utilisateur</legend>
+                    <legend>Création d'un utilisateur</legend>
                     <label for="nomUtilisateur">Nom <span class="requis">*</span></label>
 						<input type="text" id="nomUtilisateur" name="nomUtilisateur" value="<c:out value="${utilisateur.nom}"/>" size="30" maxlength="30" />
 						<span class="erreur">${form.erreurs['nomUtilisateur']}</span>
@@ -39,19 +39,19 @@
 						<span class="erreur">${form.erreurs['emailUtilisateur']}</span>
 					<br />
 					
-					<label for="actifUtilisateur">Activation (marque actif si oui)</label>
-						<input type="text" id="actifUtilisateur" name="actifUtilisateur" value="<c:out value="${utilisateur.actif}"/>" size="30" maxlength="60" />
-						<span class="erreur">${form.erreurs['actifUtilisateur']}</span>
-					<br />
-					
-					<label for="adminUtilisateur">Admin (marque admin si oui)</label>
-						<input type="text" id="adminUtilisateur" name="adminUtilisateur" value="<c:out value="${utilisateur.admin}"/>" size="30" maxlength="60" />
-						<span class="erreur">${form.erreurs['adminUtilisateur']}</span>
-					<br />
-					
 					<label for="passwordUtilisateur">Mot de Passe <span class="requis">*</span></label>
 						<input type="text" id="passwordUtilisateur" name="passwordUtilisateur" value="<c:out value="${utilisateur.motDePasse}"/>" size="30" maxlength="60" />
 						<span class="erreur">${form.erreurs['passwordUtilisateur']}</span>
+					<br />
+					
+					<label for="actifUtilisateur">Activation</label>
+						<input type="radio" name="actifUtilisateur" value="actif" CHECKED> Actif
+  						<input type="radio" name="actifUtilisateur" value="inactif"> Inactif 
+					<br />
+					
+					<label for="adminUtilisateur">Admin</label>
+						<input type="radio" name="adminUtilisateur" value="actif" > Actif
+  						<input type="radio" name="adminUtilisateur" value="inactif" CHECKED> Inactif
 					<br />
                 </fieldset>
                 <p class="info">${ form.resultat }</p>
