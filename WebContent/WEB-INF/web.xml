@@ -20,6 +20,10 @@
         <servlet-name>ListerUtilisateurs</servlet-name>
     <servlet-class>servlets.ListerUtilisateurs</servlet-class>
     </servlet>
+        <servlet>
+        <servlet-name>SuppressionUtilisateur</servlet-name>
+        <servlet-class>servlets.SuppressionUtilisateur</servlet-class>
+    </servlet>
     <servlet>
     	<servlet-name>Deconnexion</servlet-name>
     	<servlet-class>servlets.Deconnexion</servlet-class>
@@ -45,6 +49,7 @@
         <servlet-class>servlets.QuestionDisplay</servlet-class>
     </servlet>
 
+
 	<servlet-mapping>
     	<servlet-name>Connexion</servlet-name>
     	<url-pattern>/connexion</url-pattern>
@@ -61,6 +66,10 @@
     	<servlet-name>ListerUtilisateurs</servlet-name>
     	<url-pattern>/listerUtilisateurs</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>SuppressionUtilisateur</servlet-name>
+        <url-pattern>/suppressionUtilisateur</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>Deconnexion</servlet-name>
     	<url-pattern>/deconnexion</url-pattern>
@@ -101,6 +110,23 @@
         <servlet-name>QuestionDisplay</servlet-name>
         <url-pattern>/questionDisplay</url-pattern>
     </servlet-mapping>
+    
+    <filter>
+        <filter-name>Set Character Encoding</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ignore</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Set Character Encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     
     <filter>
         <filter-name>PreloadingFilter</filter-name>

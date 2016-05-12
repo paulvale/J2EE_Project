@@ -12,4 +12,8 @@ public interface UtilisateurDao {
     Utilisateur trouver( String email ) throws DAOException;
     
     List<Utilisateur> lister() throws DAOException;
+    
+    void supprimer( int id) throws DAOException;
+    
+    
 }

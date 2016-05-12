@@ -36,7 +36,7 @@
 
                     <%-- Lien vers la servlet de suppression, avec passage du nom du client - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
                     <td class="action">
-                        <a href="<c:url value=""><c:param name="idClient" value="${ mapUtilisateurs.id }" /></c:url>">
+                        <a href="<c:url value="/suppressionUtilisateur"><c:param name="idUtilisateur" value="${ mapUtilisateurs.id }" /></c:url>">
                             <img src="<c:url value="/inc/supprimer.png"/>" alt="Supprimer" />
                         </a>
                     </td>

@@ -16,9 +16,10 @@ import java.util.List;
 import beans.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
-	private static final String SQL_SELECT = "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur ORDER BY id";
+	private static final String SQL_SELECT 			 = "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur ORDER BY id";
 	private static final String SQL_SELECT_PAR_EMAIL = "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur WHERE email = ?";
 	private static final String SQL_INSERT 			 = "INSERT INTO Utilisateur (email, password, firstname, lastname, phone,company,actif,admin,createdAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+	private static final String	SQL_DELETE_PAR_ID	 = "DELETE FROM Utilisateur WHERE id = ?";
 	
 	private DAOFactory          daoFactory;
 
@@ -107,6 +108,29 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         return clients;
     }
     
+    @Override 
+    public void supprimer(int id) throws DAOException {
+    	Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet valeursAutoGenerees = null;
+
+        try {
+            /* Récupération d'une connexion depuis la Factory */
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_DELETE_PAR_ID, false,id );
+            int statut = preparedStatement.executeUpdate();
+            /* Analyse du statut retourné par la requête d'insertion */
+            if ( statut == 0 ) {
+                throw new DAOException( "Échec de la suppression de l'utilisateur" );
+            }
+
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( valeursAutoGenerees, preparedStatement, connexion );
+        }
+    	
+    }
     
     
     /*
