@@ -21,7 +21,7 @@ public class QuestionCreationForm
 	private static final String QUESTIONFIELD       	= "questionField";
     private static final String STATUSFIELD    			= "statusQuestionField";
     private static final String ORDERFIELD    			= "orderField";
-    private static final String IDFIELD       			= "idField";
+    public static final String 	ID_QUESTION 			= "idQuestion";
     
     private static final String STATUSVALUE    			= "active";
     
@@ -97,7 +97,7 @@ public class QuestionCreationForm
 	{
 		String sQuestion = getFieldValue( request, QUESTIONFIELD );
 		String sStatus 	= getFieldValue( request, STATUSFIELD );
-		String sId 	= getFieldValue( request, IDFIELD );
+		String sId 	= getFieldValue( request, ID_QUESTION );
 		String sOrder = getFieldValue( request, ORDERFIELD );
 		Long lOrder = 0L;
 		Long lId = 0L;
@@ -175,6 +175,47 @@ public class QuestionCreationForm
 	    else 
 	    {
 	    	m_sResult = "Echec de la création de la question.";
+	    }
+		
+		return newQuestion;
+	}
+    
+    public Question modifyQuestion(HttpServletRequest request)
+	{
+		
+    	Survey survey;
+    	
+
+        /* Récupération du nom du sujet du questionnaire choisi */
+        String sSurveyId = getFieldValue( request, SURVEYLISTFIELD );
+        Long lSurveyId = null;
+        try 
+		{
+	        lSurveyId = surveyIdValidation( sSurveyId );
+	    } 
+		catch ( Exception e ) 
+		{
+	        setErrors( SURVEYLISTFIELD, e.getMessage() );
+	    }
+        
+        /* Récupération de l'objet survey correspondant dans la session */
+        HttpSession session = request.getSession();
+        
+        survey = ( (Map<String, Survey>) session.getAttribute( SURVEYS_SESSION ) ).get( lSurveyId );
+
+        
+    	
+		Question newQuestion = setNewQuestion(request);
+		newQuestion.setSurvey(survey);
+		
+		if ( m_mapErrors.isEmpty() ) 
+	    {
+			m_questionDao.modify(newQuestion);
+			m_sResult = "Succès de la modification de la question. ";
+	    } 
+	    else 
+	    {
+	    	m_sResult = "Echec de la modification de la question.";
 	    }
 		
 		return newQuestion;

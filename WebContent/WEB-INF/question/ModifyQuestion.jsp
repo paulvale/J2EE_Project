@@ -4,13 +4,13 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Création d'une question</title>
+        <title>Modification d'une question</title>
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
     <body>
         <c:import url="/inc/menu.jsp" />
         <div>
-            <form method="post" action="<c:url value="/questionCreation"/>">
+            <form method="post" action="<c:url value="/questionModification"/>">
                 <fieldset>
                     <legend>Informations questionnaire</legend>
                     
@@ -24,7 +24,15 @@
                             <c:forEach items="${ sessionScope.surveys }" var="mapSurveys">
                             <%--  L'expression EL ${mapSurveys.value} permet de cibler l'objet Survey stocké en tant que valeur dans la Map, 
                                   et on cible ensuite simplement ses propriétés nom et prenom comme on le ferait avec n'importe quel bean. --%>
-                            <option value="${ mapSurveys.value.id }">${ mapSurveys.value.subject }</option>
+                            	<c:choose>
+                            		<c:when test="${ mapSurveys.value.id == question.survey.id}">
+                            			<option value="${ mapSurveys.value.id }" selected>${ mapSurveys.value.subject }</option>
+                            		</c:when>
+                            		<c:otherwise>
+                            			<option value="${ mapSurveys.value.id }">${ mapSurveys.value.subject }</option>
+                            		</c:otherwise>
+                            	</c:choose>
+                            	
                             </c:forEach>
                         </select>
                         <span class="erreur">${form.errors['surveysList']}</span>
@@ -36,21 +44,32 @@
                     <legend>Informations question</legend>
                     
                     <label for="questionField">Intitulé <span class="requis">*</span></label>
-                    <input type="text" id="questionField" name="questionField" value="" size="30" maxlength="100"  />
+                    <input type="text" id="questionField" name="questionField" value="${ question.text }" size="30" maxlength="100"  />
                     <span class="erreur">${form.errors['questionField']}</span>
                     <br />
                     
                     <label for="orderField">Ordre <span class="requis">*</span></label>
-                    <input type="text" id="orderField" name="orderField" value="" size="30" maxlength="30"  />
+                    <input type="text" id="orderField" name="orderField" value="${ question.order }" size="30" maxlength="30"  />
                     <span class="erreur">${form.errors['orderField']}</span>
                     <br />
                     
-                    <input type="radio" name="statusQuestionField" value="active" checked />  Actif
-					<input type="radio" name="statusQuestionField" value="inactive" /> Inactif<br>
-                    <br />
+                    <c:choose>
+                    	<c:when test="${ question.active == 'active' }">
+                    		<input type="radio" name="statusQuestionField" value="active" checked />  Actif
+							<input type="radio" name="statusQuestionField" value="inactive" /> Inactif<br>
+		                    <br />
+                    	</c:when>
+                    	<c:otherwise>
+                    		<input type="radio" name="statusQuestionField" value="active"  />  Actif
+							<input type="radio" name="statusQuestionField" value="inactive" checked /> Inactif<br>
+		                    <br />
+                    	</c:otherwise>
+                    </c:choose>
+                    
                     
                     <p class="info">${ form.result }</p>
                 </fieldset>
+                <input type="hidden" name="idQuestion" value = "${ sessionScope.question.id }"/>
                 <input type="submit" value="Valider"  />
                 <input type="reset" value="Remettre à zéro" /> <br />
             </form>

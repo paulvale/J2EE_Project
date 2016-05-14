@@ -21,13 +21,13 @@ public class SurveyModification extends HttpServlet
 	
 	public static final String 		ATTRIBUTESURVEY 	= "survey";
 	public static final String 		SURVEYS_SESSION		= "surveys";
-    public static final String 		PARAMID 			= "idParameter";
+    public static final String 		ID_SURVEY 			= "idParameter";
     public static final String 		ATTRIBUTEFORM   	= "form";
     
     private static final String 	SUBJECTFIELD       	= "subjectField";
     private static final String 	ERROREXISTENCE		= "Ce sujet existe déjà, il ne peut y avoir deux questionnaires avec le même sujet.";
     
-	public static final String 		VIEW            	= "/WEB-INF/survey/DisplaySurvey.jsp";
+	public static final String 		VIEW            	= "/surveyDisplay";
 	public static final String 		LISTVIEW         	= "/WEB-INF/survey/SurveyList.jsp";
 	public static final String 		FORMVIEW	        = "/WEB-INF/survey/ModifySurvey.jsp";
 	
@@ -43,7 +43,7 @@ public class SurveyModification extends HttpServlet
     {
         /* À la réception d'une requête GET, affichage de la liste des questionnaires */
 		
-		String sId = request.getParameter(PARAMID);
+		String sId = request.getParameter(ID_SURVEY);
 		boolean bError = false;
 		
 		if(sId != null)
@@ -72,7 +72,7 @@ public class SurveyModification extends HttpServlet
 	    		else
 	    		{
 	    			System.out.println("Pas de questionnaire avec cet id");
-	    			bError = false;
+	    			bError = true;
 	    		}
 	        }
 		}
@@ -101,22 +101,17 @@ public class SurveyModification extends HttpServlet
     	/* Récupération de la map des surveys dans la session */
     	HttpSession session = request.getSession();
     	
-    	if ( form.getErrors().isEmpty() ) 
-    	{
-            surveys = (HashMap<Long, Survey>) session.getAttribute( SURVEYS_SESSION );
-            /* Si aucune map n'existe, alors initialisation d'une nouvelle map */
-            surveys.remove(survey.getId());
-            surveys.put(survey.getId(), survey);
-    	}
-    	
     	
     	if(form.getErrors().isEmpty())
     	{
-    		/* Puis ajout du client courant dans la map */
-            surveys.put( survey.getId(), survey );
+    		String idSurvey = survey.getId().toString();
+    		/* Puis ajout du questionnaire courant dans la map */
+    		surveys = (HashMap<Long, Survey>) session.getAttribute( SURVEYS_SESSION );
+            surveys.remove(survey.getId());
+            surveys.put(survey.getId(), survey);
             /* Et enfin (ré)enregistrement de la map en session */
             session.setAttribute( SURVEYS_SESSION, surveys );
-    		this.getServletContext().getRequestDispatcher( VIEW ).forward( request, response );
+            response.sendRedirect( request.getContextPath() + VIEW + "?" + ID_SURVEY + "=" + idSurvey);
     	}
     	else
     	{	

@@ -10,9 +10,11 @@ public interface AnswerDao
 {
     void create( Answer question ) throws DAOException;
 
-    Answer find( Pair<String, String> questionAnswerPair ) throws DAOException;
+    Answer find( Long lId ) throws DAOException;
 
-    List<Answer> lister() throws DAOException;
+    List<Answer> lister(Long lQuestionId) throws DAOException;
+    
+    public void modify( Answer answer ) throws DAOException;
 
-    void supprimer( Answer question ) throws DAOException;
+    void delete( Answer question ) throws DAOException;
 }

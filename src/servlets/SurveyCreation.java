@@ -27,9 +27,9 @@ public class SurveyCreation extends HttpServlet
     public static final String 		SURVEYS_SESSION	 	= "surveys";
     private static final String 	SUBJECTFIELD       	= "subjectField";
     private static final String 	ERROREXISTENCE		= "Ce sujet existe déjà, il ne peut y avoir deux questionnaires avec le même sujet.";
-    public static final String 		PARAMID 			= "idParameter";
+    public static final String 		ID_SURVEY 			= "idParameter";
     
-    public static final String VIEW             	= "/WEB-INF/survey/DisplaySurvey.jsp";
+    public static final String VIEW             	= "/surveyDisplay";
     public static final String FORMVIEW	        	= "/WEB-INF/survey/CreateSurvey.jsp";
 
     private SurveyDao          m_surveyDao;
@@ -68,11 +68,13 @@ public class SurveyCreation extends HttpServlet
     	
     	if(form.getErrors().isEmpty())
     	{
+    		String idSurvey = survey.getId().toString();
     		/* Puis ajout du client courant dans la map */
             surveys.put( survey.getId(), survey );
             /* Et enfin (ré)enregistrement de la map en session */
             session.setAttribute( SURVEYS_SESSION, surveys );
-    		this.getServletContext().getRequestDispatcher( VIEW ).forward( request, response );
+    		//this.getServletContext().getRequestDispatcher( VIEW ).forward( request, response );
+    		response.sendRedirect( request.getContextPath() + VIEW + "?" + ID_SURVEY + "=" + idSurvey);
     	}
     	else
     	{	

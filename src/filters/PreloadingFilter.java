@@ -26,7 +26,7 @@ public class PreloadingFilter implements Filter
 {
     public static final String CONF_DAO_FACTORY      	= "daofactory";
     public static final String ATT_SESSION_SURVEY   	= "surveys";
-    public static final String ATT_SESSION_QUESTION 	= "questions";
+    public static final String ATT_SESSION_QUESTION 	= "allQuestions";
     public static final String ATT_SESSION_ANSWER   	= "answers";
 
     private SurveyDao          surveyDao;
@@ -37,6 +37,7 @@ public class PreloadingFilter implements Filter
     {
         /* Récupération d'une instance de nos DAO Client et Commande */
         this.surveyDao = ( (DAOFactory) config.getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSurveyDao();
+        this.questionDao = ( (DAOFactory) config.getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getQuestionDao();
     }
 
     public void doFilter( ServletRequest req, ServletResponse res, FilterChain chain ) throws IOException,
@@ -71,6 +72,21 @@ public class PreloadingFilter implements Filter
         /*
          * De même pour la map des questions et celle des reponses
          */
+        
+        if ( session.getAttribute( ATT_SESSION_QUESTION ) == null ) 
+        {
+            /*
+             * Récupération de la liste des questionnaires existants, et enregistrement
+             * en session
+             */
+            List<Question> listQuestions = questionDao.lister();
+            Map<Long, Question> mapQuestions = new HashMap<Long, Question>();
+            for ( Question question : listQuestions ) 
+            {
+            	mapQuestions.put( question.getId(), question );
+            }
+            session.setAttribute( ATT_SESSION_QUESTION, mapQuestions );
+        }
 
         /* Pour terminer, poursuite de la requête en cours */
         chain.doFilter( request, res );

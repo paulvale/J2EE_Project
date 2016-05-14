@@ -107,7 +107,7 @@ public class SurveyDaoImpl implements SurveyDao
             int status = preparedStatement.executeUpdate();
             if ( status == 0 ) 
             {
-                throw new DAOException( "Échec de la création du client, aucune ligne ajoutée dans la table." );
+                throw new DAOException( "Échec de la création du questionnaire, aucune ligne ajoutée dans la table." );
             }
             
         } 
@@ -245,16 +245,6 @@ public class SurveyDaoImpl implements SurveyDao
         survey.setCreationDate( new DateTime( resultSet.getTimestamp( "createdAt" ) ) );
         
         return survey;
-        /*
-        client.setId( resultSet.getLong( "id" ) );
-        client.setNom( resultSet.getString( "nom" ) );
-        client.setPrenom( resultSet.getString( "prenom" ) );
-        client.setAdresse( resultSet.getString( "adresse" ) );
-        client.setTelephone( resultSet.getString( "telephone" ) );
-        client.setEmail( resultSet.getString( "email" ) );
-        client.setImage( resultSet.getString( "image" ) );
-        return client;
-        */
     }
 
 }

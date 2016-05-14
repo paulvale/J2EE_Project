@@ -18,7 +18,6 @@ public class Question
 	private boolean m_bActive;
 	private Long m_lOrder;
 	private Survey 	m_survey;
-	private List<Pair<String, Integer>> m_lstAnswers;
 	
 	
 	public Long getId()

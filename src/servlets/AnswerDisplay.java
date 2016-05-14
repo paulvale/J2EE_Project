@@ -11,38 +11,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.Question;
-import beans.Survey;
-import dao.DAOFactory;
-import dao.QuestionDao;
 
-public class SurveyDisplay extends HttpServlet 
+import beans.Answer;
+import beans.Question;
+import dao.DAOFactory;
+import dao.AnswerDao;
+
+public class AnswerDisplay extends HttpServlet 
 {
 	public static final String CONF_DAO_FACTORY      	= "daofactory";
-	public static final String ATTRIBUTESURVEY 			= "survey";
-	public static final String SURVEYS_SESSION			= "surveys";
-	public static final String QUESTIONS_SESSION       	= "questions";
-    public static final String ID_SURVEY 				= "idParameter";
+	public static final String ATTRIBUTEANSWER 			= "answer";
+	public static final String ANSWERS_SESSION			= "answers";
+    public static final String ID_ANSWER 				= "idAnswer";
     public static final String ATTRIBUTEFORM   			= "form";
     
-	public static final String VIEW             = "/WEB-INF/survey/DisplaySurvey.jsp";
+	public static final String VIEW             = "/WEB-INF/answer/DisplayAnswer.jsp";
 	public static final String LISTVIEW         = "/WEB-INF/survey/SurveyList.jsp";
 	
-	private QuestionDao          m_questionDao;
     
-    public void init() throws ServletException 
-    {
-        /* Récupération d'une instance de notre DAO Question */
-        this.m_questionDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getQuestionDao();
-    }
 	
 	
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException 
     {
         /* À la réception d'une requête GET, affichage de la liste des questionnaires */
 		
-		String sId = request.getParameter(ID_SURVEY);
-    	Survey survey = null;
+		String sId = request.getParameter(ID_ANSWER);
+    	Answer answer = null;
     	HttpSession session = request.getSession();
     	Long lId = null;
     	if(sId != null)
@@ -50,27 +44,25 @@ public class SurveyDisplay extends HttpServlet
     		lId = Long.parseLong(sId);
     	}
     	
-    	Map<Long, Survey> surveys = (HashMap<Long, Survey>) session.getAttribute( SURVEYS_SESSION );
+    	List<Answer> answers = (List<Answer>) session.getAttribute( ANSWERS_SESSION );
     	
     	boolean bError = false;
-    	if ( surveys == null ) 
+    	if ( answers == null ) 
         {
-    		System.out.println("Pas de map en sessions");
+    		System.out.println("Pas de liste en session");
     		bError = true;
         }
         else
         {
         	
-        	survey = surveys.get( lId );
-    		if( survey != null)
+        	answer = find( answers, lId );
+    		if( answer != null)
     		{
-    			session.setAttribute( ATTRIBUTESURVEY, survey );
-    			List<Question> listQuestions = m_questionDao.lister(lId);
-                session.setAttribute( QUESTIONS_SESSION, listQuestions );
+    			session.setAttribute( ATTRIBUTEANSWER, answer );
     		}
     		else
     		{
-    			System.out.println("Error - Pas de questionnaire avec cet id");
+    			System.out.println("Error - Pas de réponse avec cet id");
     			bError = true;
     		}
         	
@@ -86,4 +78,20 @@ public class SurveyDisplay extends HttpServlet
     	}
 		
     }
+	
+	
+	public Answer find(List<Answer> answers, Long lId)
+	{
+		Answer answer = null;
+		for(int i = 0; i < answers.size(); i++)
+		{
+			if(answers.get(i).getId().equals(lId))
+			{
+				answer = answers.get(i);
+				break;
+			}
+		}
+		return answer;
+	}
+	
 }

@@ -14,6 +14,8 @@ public interface QuestionDao
     Question find( Long lId ) throws DAOException;
 
     List<Question> lister(Long lSurveyId) throws DAOException;
+    
+    List<Question> lister() throws DAOException;
 
     void delete( Question question ) throws DAOException;
 }
