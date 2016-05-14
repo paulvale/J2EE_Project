@@ -133,6 +133,7 @@ public class SurveyDaoImpl implements SurveyDao
         try 
         {
             connection = daoFactory.getConnection();
+            System.out.println(connection);
             preparedStatement = connection.prepareStatement( SQL_SELECT );
             resultSet = preparedStatement.executeQuery();
             while ( resultSet.next() ) 

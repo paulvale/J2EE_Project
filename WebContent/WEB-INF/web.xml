@@ -36,6 +36,7 @@
     	<servlet-name>Deconnexion</servlet-name>
     	<servlet-class>servlets.Deconnexion</servlet-class>
 	</servlet>
+	
 	<servlet>
         <servlet-name>SurveyCreation</servlet-name>
         <servlet-class>servlets.SurveyCreation</servlet-class>
@@ -43,6 +44,14 @@
     <servlet>
         <servlet-name>SurveyList</servlet-name>
     	<servlet-class>servlets.SurveyList</servlet-class>
+    </servlet>
+        <servlet>
+        <servlet-name>SurveyDisplay</servlet-name>
+    	<servlet-class>servlets.SurveyDisplay</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SurveyModification</servlet-name>
+    	<servlet-class>servlets.SurveyModification</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SurveyDeletion</servlet-name>
@@ -55,6 +64,30 @@
    	<servlet>
         <servlet-name>QuestionDisplay</servlet-name>
         <servlet-class>servlets.QuestionDisplay</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuestionModification</servlet-name>
+        <servlet-class>servlets.QuestionModification</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuestionDeletion</servlet-name>
+        <servlet-class>servlets.QuestionDeletion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AnswerCreation</servlet-name>
+        <servlet-class>servlets.AnswerCreation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AnswerModification</servlet-name>
+        <servlet-class>servlets.AnswerModification</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AnswerDisplay</servlet-name>
+        <servlet-class>servlets.AnswerDisplay</servlet-class>
+    </servlet>
+        <servlet>
+        <servlet-name>AnswerDeletion</servlet-name>
+        <servlet-class>servlets.AnswerDeletion</servlet-class>
     </servlet>
 
 
@@ -91,112 +124,59 @@
     	<url-pattern>/deconnexion</url-pattern>
     </servlet-mapping>
     
-    <servlet>
-        <servlet-name>SurveyCreation</servlet-name>
-        <servlet-class>servlets.SurveyCreation</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>SurveyCreation</servlet-name>
         <url-pattern>/surveyCreation</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>SurveyList</servlet-name>
-    	<servlet-class>servlets.SurveyList</servlet-class>
-    </servlet>
+    </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>SurveyList</servlet-name>
         <url-pattern>/surveyList</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>SurveyDeletion</servlet-name>
-        <servlet-class>servlets.SurveyDeletion</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>SurveyDeletion</servlet-name>
         <url-pattern>/surveyDeletion</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>SurveyDisplay</servlet-name>
-    	<servlet-class>servlets.SurveyDisplay</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>SurveyDisplay</servlet-name>
         <url-pattern>/surveyDisplay</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>SurveyModification</servlet-name>
-    	<servlet-class>servlets.SurveyModification</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>SurveyModification</servlet-name>
         <url-pattern>/surveyModification</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>QuestionCreation</servlet-name>
-        <servlet-class>servlets.QuestionCreation</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>QuestionCreation</servlet-name>
         <url-pattern>/questionCreation</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>QuestionModification</servlet-name>
-        <servlet-class>servlets.QuestionModification</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>QuestionModification</servlet-name>
         <url-pattern>/questionModification</url-pattern>
     </servlet-mapping>
-	<servlet>
-        <servlet-name>QuestionDisplay</servlet-name>
-        <servlet-class>servlets.QuestionDisplay</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>QuestionDisplay</servlet-name>
         <url-pattern>/questionDisplay</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>QuestionDeletion</servlet-name>
-        <servlet-class>servlets.QuestionDeletion</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>QuestionDeletion</servlet-name>
         <url-pattern>/questionDeletion</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>AnswerCreation</servlet-name>
-        <servlet-class>servlets.AnswerCreation</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>AnswerCreation</servlet-name>
         <url-pattern>/answerCreation</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>AnswerModification</servlet-name>
-        <servlet-class>servlets.AnswerModification</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>AnswerModification</servlet-name>
         <url-pattern>/answerModification</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>AnswerDisplay</servlet-name>
-        <servlet-class>servlets.AnswerDisplay</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>AnswerDisplay</servlet-name>
         <url-pattern>/answerDisplay</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>AnswerDeletion</servlet-name>
-        <servlet-class>servlets.AnswerDeletion</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>AnswerDeletion</servlet-name>
         <url-pattern>/answerDeletion</url-pattern>
     </servlet-mapping>
+    
     
     <filter>
         <filter-name>Set Character Encoding</filter-name>
