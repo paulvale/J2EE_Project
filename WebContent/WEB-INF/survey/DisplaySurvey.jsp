@@ -20,11 +20,12 @@
                 <div id="body">
 			        <c:choose>
 			            <%-- Si aucun client n'existe en session, affichage d'un message par défaut. --%>
-			            <c:when test="${ empty sessionScope.surveys }">
-			                <p class="erreur">Aucun questionnaire enregistré.</p>
+			            <c:when test="${ empty sessionScope.questions }">
+			                <p class="erreur">Aucune question enregistrée.</p>
 			            </c:when>
 			            <%-- Sinon, affichage du tableau. --%>
 			            <c:otherwise>
+			            <p>Liste des questions: </p>
 			            <table>
 			                <tr>
 			                    <th>Intitulé</th>
@@ -40,7 +41,7 @@
 			                    
 			                    <%-- Lien vers la servlet de suppression, avec passage l'id de la question - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
 			                    <td>
-			                    	<a href="<c:url value="/questionDisplay"><c:param name="idParameter" value="${ listQuestions.id }" /></c:url>"><c:out value="${ listQuestions.text }"/> </a>
+			                    	<a href="<c:url value="/questionDisplay"><c:param name="idQuestion" value="${ listQuestions.id }" /></c:url>"><c:out value="${ listQuestions.text }"/> </a>
 			                    </td>
 			                    <td>
 			                    	<c:out value="${ listQuestions.order }"/>
@@ -48,10 +49,10 @@
 			                    <td><c:out value="${ listQuestions.active }"/></td>
 			                    
 			                    <td class="action">
-			                    	<a href="<c:url value="/questionModification"><c:param name="idParameter" value="${ listQuestions.id }" /></c:url>">
+			                    	<a href="<c:url value="/questionModification"><c:param name="idQuestion" value="${ listQuestions.id }" /><c:param name="idParameter" value="${ survey.id }" /></c:url>">
 			                            <img src="<c:url value="/inc/edit.gif"/>" alt="Modifier" />
 			                        </a>
-			                        <a href="<c:url value="/questionDeletion"><c:param name="idQuestion" value="${ listQuestions.id }" /></c:url>">
+			                        <a href="<c:url value="/questionDeletion"><c:param name="idQuestion" value="${ listQuestions.id }" /><c:param name="idParameter" value="${ survey.id }" /></c:url>">
 			                            <img src="<c:url value="/inc/supprimer.png"/>" alt="Supprimer" />
 			                        </a>
 			                    </td>

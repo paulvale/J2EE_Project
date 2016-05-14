@@ -4,40 +4,40 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Création d'une question</title>
+        <title>Création d'une réponse</title>
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
     <body>
         <c:import url="/inc/menu.jsp" />
         <div>
-            <form method="post" action="<c:url value="/questionCreation"/>">
+            <form method="post" action="<c:url value="/answerCreation"/>">
                 <fieldset>
-                    <legend>Informations questionnaire</legend>
+                    <legend>Informations question</legend>
                     
                     
                     <%-- Si et seulement si la Map des questionnaires en session n'est pas vide, alors on crée la liste déroulante --%>
-                    <c:if test="${ !empty sessionScope.surveys }">
+                    <c:if test="${ !empty sessionScope.allQuestions }">
                     <div id="oldSurvey">
-                        <select name="surveysList" id="surveysList">
-                            <option value="">Choisissez un questionnaire...</option>
+                        <select name="questionsList" id="questionsList">
+                            <option value="">Choisissez un question...</option>
                             <%-- Boucle sur la map des surveys --%>
-                            <c:forEach items="${ sessionScope.surveys }" var="mapSurveys">
-                            <%--  L'expression EL ${mapSurveys.value} permet de cibler l'objet Survey stocké en tant que valeur dans la Map, 
+                            <c:forEach items="${ sessionScope.allQuestions }" var="mapQuestions">
+                            <%--  L'expression EL ${mapQuestions.value} permet de cibler l'objet Question stocké en tant que valeur dans la Map, 
                                   et on cible ensuite simplement ses propriétés nom et prenom comme on le ferait avec n'importe quel bean. --%>
-                            <option value="${ mapSurveys.value.id }">${ mapSurveys.value.subject }</option>
+                            <option value="${ mapQuestions.value.id }">${ mapQuestions.value.text }</option>
                             </c:forEach>
                         </select>
-                        <span class="erreur">${form.errors['surveysList']}</span>
+                        <span class="erreur">${form.errors['questionsList']}</span>
                     	<br />
                     </div>
                     </c:if>
                 </fieldset>
                 <fieldset>
-                    <legend>Informations question</legend>
+                    <legend>Informations réponse</legend>
                     
                     <label for="questionField">Intitulé <span class="requis">*</span></label>
-                    <input type="text" id="questionField" name="questionField" value="" size="30" maxlength="100"  />
-                    <span class="erreur">${form.errors['questionField']}</span>
+                    <input type="text" id="answerField" name="answerField" value="" size="30" maxlength="100"  />
+                    <span class="erreur">${form.errors['answerField']}</span>
                     <br />
                     
                     <label for="orderField">Ordre <span class="requis">*</span></label>
@@ -45,8 +45,12 @@
                     <span class="erreur">${form.errors['orderField']}</span>
                     <br />
                     
-                    <input type="radio" name="statusQuestionField" value="active" checked />  Actif
-					<input type="radio" name="statusQuestionField" value="inactive" /> Inactif<br>
+                    <input type="radio" name="statusAnswerField" value="active" checked />  Actif
+					<input type="radio" name="statusAnswerField" value="inactive" /> Inactif<br>
+                    <br />
+                    
+                    <input type="radio" name="validityField" value="valide" />  Valide
+					<input type="radio" name="validityField" value="invalide" checked /> Invalide<br>
                     <br />
                     
                     <p class="info">${ form.result }</p>
