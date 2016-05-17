@@ -5,7 +5,7 @@
 		<legend>Menu Administrateur</legend>
 		<p><a href="<c:url value="/afficherProfilAdmin"/>">Afficher mon profil</a></p>
     	<p><a href="<c:url value="/listerUtilisateurs"/>">Gestion Utilisateur</a></p>
-    	<p><a href="<c:url value=""/>">Gestion Questionnaire</a></p>
+    	<p><a href="<c:url value="/surveyList"/>">Gestion Questionnaire</a></p>
     	<p><a href="<c:url value="/deconnexion"/>">Déconnexion</a></p>
     </fieldset>
 </div>

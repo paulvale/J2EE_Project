@@ -44,8 +44,8 @@ public class ModificationUtilisateur extends HttpServlet {
         String admin = getValeurParametre( request, CHAMP_ADMIN );
         String actif = getValeurParametre( request, CHAMP_ACTIF );
         
-        boolean actifBoolean = actif == "actif" ? true : false;
-        boolean adminBoolean = admin == "admin" ? true : false;
+        boolean actifBoolean = (actif.equals("actif"))? true : false;
+        boolean adminBoolean = (admin.equals("actif"))? true : false;
         
         utilisateurDao.modificationStatus(emailUtilisateur, actifBoolean, adminBoolean);
 

@@ -8,6 +8,7 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
     <body>
+    	<c:import url="../admin/menuAdmin.jsp" />
         <c:import url="/inc/menu.jsp" />
         <div>
             <form method="post" action="<c:url value="/questionCreation"/>">
@@ -55,15 +56,6 @@
                 <input type="reset" value="Remettre à zéro" /> <br />
             </form>
         </div>
-        
-        <%-- Inclusion de la bibliothèque jQuery. Vous trouverez des cours sur JavaScript et jQuery aux adresses suivantes :
-               - http://www.siteduzero.com/tutoriel-3-309961-dynamisez-vos-sites-web-avec-javascript.html 
-               - http://www.siteduzero.com/tutoriel-3-659477-un-site-web-dynamique-avec-jquery.html 
-               
-             Si vous ne souhaitez pas télécharger et ajouter jQuery à votre projet, vous pouvez utiliser la version fournie directement en ligne par Google :
-             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> 
-             <script src="<c:url value="/inc/jquery.js"/>"></script>
-        --%>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> 
         

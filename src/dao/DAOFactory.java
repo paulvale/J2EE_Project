@@ -53,7 +53,6 @@ public class DAOFactory {
             url = properties.getProperty( PROPERTY_URL );
             driver = properties.getProperty( PROPERTY_DRIVER );
             userName = properties.getProperty( PROPERTY_NOM_UTILISATEUR );
-            System.out.println(userName);
             password = properties.getProperty( PROPERTY_MOT_DE_PASSE );
         } 
         catch ( FileNotFoundException e ) {
@@ -76,8 +75,6 @@ public class DAOFactory {
     /* Méthode chargée de fournir une connexion à la base de données */
     /* package */
     Connection getConnection() throws SQLException {
-    	System.out.println(url);
-    	System.out.println(username);
         return DriverManager.getConnection( url, username, password );
     }
 
