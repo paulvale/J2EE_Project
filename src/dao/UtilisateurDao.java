@@ -13,6 +13,10 @@ public interface UtilisateurDao {
     
     List<Utilisateur> lister() throws DAOException;
     
+    List<Utilisateur> trouverParPrenom(String prenom) throws DAOException;
+    
+    List<Utilisateur> trouverParCompany(String company) throws DAOException;
+    
     void modificationStatus( String email, boolean actif, boolean admin) throws DAOException;
     
     void supprimer( int id) throws DAOException;

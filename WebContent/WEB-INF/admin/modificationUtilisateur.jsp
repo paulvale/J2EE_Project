@@ -14,8 +14,13 @@
     	<form method="post" action="<c:url value="/modificationUtilisateur"/>">
                <fieldset>
                     <legend>Modification du statut ( actif et admin) de l'utilisateur selectionné</legend>
-                    <p>Nom : <c:out value="${ utilisateur.nom }"/></p>
-            		<p>Prénom : <c:out value="${ utilisateur.prenom }"/></p>
+            		<label for="nomUtilisateur">Nom</label>
+						<input type="text" id="nomUtilisateur" name="nomUtilisateur" value="<c:out value="${utilisateur.nom}"/>" readonly="readonly" />
+					<br />
+					
+            		<label for="prenomUtilisateur">Prénom</label>
+						<input type="text" id="prenomUtilisateur" name="prenomUtilisateur" value="<c:out value="${utilisateur.prenom}"/>" readonly="readonly" />
+					<br />
             		
             		<label for="emailUtilisateur">Email</label>
 						<input type="text" id="emailUtilisateur" name="emailUtilisateur" value="<c:out value="${utilisateur.email}"/>" readonly="readonly" />

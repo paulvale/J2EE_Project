@@ -29,6 +29,14 @@
     <servlet-class>servlets.AfficherUtilisateur</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>RechercheUtilisateur</servlet-name>
+        <servlet-class>servlets.RechercheUtilisateur</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListerRechercheUtilisateurs</servlet-name>
+        <servlet-class>servlets.ListerRechercheUtilisateurs</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ModificationUtilisateur</servlet-name>
         <servlet-class>servlets.ModificationUtilisateur</servlet-class>
     </servlet>
@@ -114,6 +122,14 @@
     <servlet-mapping>
         <servlet-name>AfficherUtilisateur</servlet-name>
         <url-pattern>/afficherUtilisateur</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RechercheUtilisateur</servlet-name>
+        <url-pattern>/rechercheUtilisateur</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListerRechercheUtilisateurs</servlet-name>
+        <url-pattern>/listerRechercheUtilisateurs</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ModificationUtilisateur</servlet-name>

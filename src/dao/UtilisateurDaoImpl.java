@@ -16,11 +16,13 @@ import java.util.List;
 import beans.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
-	private static final String SQL_SELECT 			 = "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur ORDER BY id";
-	private static final String SQL_SELECT_PAR_EMAIL = "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur WHERE email = ?";
-	private static final String SQL_INSERT 			 = "INSERT INTO Utilisateur (email, password, firstname, lastname, phone,company,actif,admin,createdAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-	private static final String	SQL_DELETE_PAR_ID	 = "DELETE FROM Utilisateur WHERE id = ?";
-	private static final String	SQL_UPDATE_STATUS    = "UPDATE Utilisateur SET actif = ? , admin = ? WHERE email = ?";
+	private static final String SQL_SELECT 			  = "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur ORDER BY id";
+	private static final String SQL_SELECT_PAR_EMAIL  = "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur WHERE email = ?";
+	private static final String SQL_SELECT_PAR_PRENOM = "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur WHERE firstname LIKE ? ORDER BY id";
+	private static final String SQL_SELECT_PAR_COMPANY= "SELECT id, email, password, company, firstname,lastname, phone,actif,admin,createdAt FROM Utilisateur WHERE company LIKE ? ORDER BY id";
+	private static final String SQL_INSERT 			  = "INSERT INTO Utilisateur (email, password, firstname, lastname, phone,company,actif,admin,createdAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+	private static final String	SQL_DELETE_PAR_ID	  = "DELETE FROM Utilisateur WHERE id = ?";
+	private static final String	SQL_UPDATE_STATUS     = "UPDATE Utilisateur SET actif = ? , admin = ? WHERE email = ?";
 	
 	private DAOFactory          daoFactory;
 
@@ -105,6 +107,54 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         } finally {
             fermeturesSilencieuses( resultSet, preparedStatement, connection );
         }
+
+        return clients;
+    }
+    
+    @Override
+    public List<Utilisateur> trouverParPrenom(String prenom) throws DAOException {
+    	Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Utilisateur> clients = new ArrayList<Utilisateur>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connection, SQL_SELECT_PAR_PRENOM,false, '%'+prenom+'%');
+            resultSet = preparedStatement.executeQuery();
+            while ( resultSet.next() ) {
+                clients.add( map( resultSet ) );
+            }
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connection );
+        }
+        
+
+        return clients;
+    }
+    
+    @Override
+    public List<Utilisateur> trouverParCompany(String company) throws DAOException {
+    	Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Utilisateur> clients = new ArrayList<Utilisateur>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee( connection, SQL_SELECT_PAR_COMPANY,false, '%'+company+'%');
+            resultSet = preparedStatement.executeQuery();
+            while ( resultSet.next() ) {
+                clients.add( map( resultSet ) );
+            }
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connection );
+        }
+        
 
         return clients;
     }
