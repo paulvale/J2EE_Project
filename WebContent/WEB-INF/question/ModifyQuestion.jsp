@@ -8,6 +8,7 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
     <body>
+    	<c:import url="../admin/menuAdmin.jsp" />
         <c:import url="/inc/menu.jsp" />
         <div>
             <form method="post" action="<c:url value="/questionModification"/>">

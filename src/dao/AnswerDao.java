@@ -6,8 +6,7 @@ import java.util.List;
 import beans.Answer;
 import javafx.util.Pair;
 
-public interface AnswerDao 
-{
+public interface AnswerDao {
     void create( Answer question ) throws DAOException;
 
     Answer find( Long lId ) throws DAOException;

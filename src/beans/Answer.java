@@ -3,6 +3,8 @@ package beans;
 public class Answer 
 {
 	private Long		m_lId;
+	private Long 		m_lIdQuestionnaireFK;
+	private Long		m_lIdQuestionFK;
 	private String 		m_sText;
 	private Long 		m_lOrder;
 	private boolean 	m_bActive;
@@ -13,9 +15,30 @@ public class Answer
 	{
 		return m_lId;
 	}
+	
 	public void setId(Long lId)
 	{
 		m_lId = lId;
+	}
+	
+	public Long getIdQuestionFK()
+	{
+		return m_lIdQuestionFK;
+	}
+	
+	public void setIdQuestionFK(Long lId)
+	{
+		m_lIdQuestionFK = lId;
+	}
+	
+	public Long getIdQuestionnaireFK()
+	{
+		return m_lIdQuestionnaireFK;
+	}
+	
+	public void setIdQuestionnaireFK(Long lId)
+	{
+		m_lIdQuestionnaireFK = lId;
 	}
 	
 	public String getText()

@@ -95,8 +95,11 @@ public class DAOFactory {
         return new AnswerDaoImpl( this );
     }
     
-    
     public UtilisateurDao getUtilisateurDao() {
         return new UtilisateurDaoImpl( this );
+    }
+    
+    public ResultDao getResultDao() {
+        return new ResultDaoImpl( this );
     }
 }
