@@ -85,3 +85,11 @@ td{
 td.action{
 	text-align: center;
 }
+
+/* Questions -----------------------------------------------------------------------------------*/
+.question {
+	background : #9EEAE0;
+	border-style : groove;
+	border-width : 4px;
+	margin : 20 px;
+}

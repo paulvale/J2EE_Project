@@ -12,14 +12,18 @@
 
 
     <body>
-        <h1>SurveyId:${sessionScope.survey.getId()} , SurveySubject:${sessionScope.survey.getSubject()}</h1><br/>
+        <h1> Questionnaire en cours <h1>
+        <h1> Id:${sessionScope.survey.getId()}</h1>
+        <h1> Sujet:${sessionScope.survey.getSubject()}</h1>
         <form method="post" action="questionnaireResult">
             <c:forEach items="${ sessionScope.questions }" var="ListQuestions" varStatus="loop">
-                <h2><c:out value="${ ListQuestions.getId()}" />
-                <c:out value="${ ListQuestions.getText()}" />
+            	<div class="question">
+            		<h2>Q<c:out value="${ ListQuestions.getId()}" /> - <c:out value="${ ListQuestions.getText()}" /> </h2>
                 <c:forEach items="${ sessionScope.allanswers[ ListQuestions.id ] }" var="ListAnswers" varStatus="loop">
-                    <input type="checkbox" name="answer.${ListAnswers.id}" value="${ ListAnswers.id }"><c:out value="${ ListAnswers.getText() }"/>
-                </c:forEach></h2>
+                    <input type="checkbox" name="answer.${ListAnswers.id}" value="${ ListAnswers.id }">
+                    <c:out value="${ ListAnswers.getText() }"/></br>
+                </c:forEach>
+            	</div>
             </c:forEach>
             <input type="submit" value="Submit"></input>
             <input type="reset" value="Reset"></input> 

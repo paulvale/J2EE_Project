@@ -14,6 +14,7 @@ public class Utilisateur {
     private Boolean	  actif;
     private String	  phone;
     private String	  company;
+    
 	public Long getId() {
 		return id;
 	}
