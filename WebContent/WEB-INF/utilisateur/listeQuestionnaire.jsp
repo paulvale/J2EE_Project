@@ -32,7 +32,7 @@
                     <td><c:out value="${ varQuestionnaire.subject }"/></td>
                     <%-- Lien vers la servlet de modification, avec passage de l'id de l'utilisateur - en paramètre grâce à la balise <c:param/>. --%>
                     <td class="action">
-                        <a >
+                        <a href="<c:url value="/questionnaireDisplay"><c:param name="idSurvey" value="${ varQuestionnaire.id }" /></c:url>">
                             <img src="<c:url value="/inc/modifier.png"/>" alt="Modifier" />
                         </a>
                     </td>
