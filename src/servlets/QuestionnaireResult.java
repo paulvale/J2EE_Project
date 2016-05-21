@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import beans.Answer;
 import beans.Question;
 import beans.Survey;
+import beans.Utilisateur;
 import dao.DAOFactory;
 import dao.QuestionDao;
 import dao.ResultDao;
@@ -34,6 +35,7 @@ public class QuestionnaireResult extends HttpServlet {
 	public static final String ATTRIBUTELISTE           = "liste";
 	public static final String ATTRIBUTEREPONSES        = "reponses";
 	public static final String ATTRIBUTESCORE           = "score";
+	public static final String ATT_SESSION_USER         = "utilisateurSession";
 	
 	
 	private ResultDao          m_resultDao;
@@ -49,6 +51,7 @@ public class QuestionnaireResult extends HttpServlet {
 		List<Long> liste = new ArrayList<Long>();
 		Answer reponse = new Answer();
 		List<Answer> reponses= new ArrayList<Answer>(); 
+		Utilisateur utilisateur =new Utilisateur();
 		float score = 0;
 		
 		//C'est pour conserver toutes les valeurs qui est transmit par la rêquete.
@@ -57,33 +60,26 @@ public class QuestionnaireResult extends HttpServlet {
 		
 		//Conserver tous les ids de toutes les réponses de l'utilisateur dans list 
 		Collection<String[]> list = map.values();
-		//System.out.println();
 
 	
 		//Par rapport ça, on peut obtenir toutes les réponses de l'utilisateur, conservé dans la liste réponses.
 		for(String[] id : list){
-			//System.out.println(id[0]);
-			String lId = id[0];//request.getParameter("answer.*");
+			String lId = id[0];
 			Long lIndex = Long.parseLong(lId);
 			liste.add(lIndex);
 			reponse=m_answerDao.find(lIndex);
 			reponses.add(reponse);	
 		}
-		
 		//Après, on conserve les réponses de l'utilisateur dans le tableau  
+		utilisateur = (Utilisateur) session.getAttribute(ATT_SESSION_USER);
+        Long lId_Utilisateur   = utilisateur.getId();
 		
     	ResultForm form = new ResultForm(m_resultDao);
-        form.createResult(reponses);
+        form.createResult(reponses, lId_Utilisateur);
         
         Long lId = reponses.get(0).getIdQuestionnaireFK();
-        score=form.calculResultat(reponses,lId);
-		
-		
-		//request.setAttribute( ATT, lId );
-		//request.setAttribute( "lIndex", lIndex );
-	    //session.setAttribute(ATTRIBUTELISTE, liste);
-	    //session.setAttribute(ATTRIBUTEREPONSES, reponses);
-	    //session.setAttribute(ATTRIBUTESCORE, score);
+        score=form.calculResultat(reponses,lId, lId_Utilisateur);
+        
 		this.getServletContext().getRequestDispatcher( VIEW ).forward( request, response );		
 	}
 }

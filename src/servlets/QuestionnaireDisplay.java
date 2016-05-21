@@ -40,7 +40,7 @@ public class QuestionnaireDisplay extends HttpServlet {
 	private AnswerDao          m_answerDao;
 	
 	public void init() throws ServletException  {
-		/* R®¶cup®¶ration d'une instance de notre DAO Question */
+		/* Récupération d'une instance de notre DAO Question */
 	    this.m_surveyDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSurveyDao();
 	    this.m_questionDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getQuestionDao();
 	    this.m_answerDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getAnswerDao();

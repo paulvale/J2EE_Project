@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -12,7 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import dao.UtilisateurDao;
 import dao.DAOFactory;
-
+import dao.ResultDao;
+import dao.SurveyDao;
+import beans.Resultat;
+import beans.Survey;
 import beans.Utilisateur;
 import forms.ConnexionForm;
 
@@ -21,16 +25,23 @@ public class Connexion extends HttpServlet {
     public static final String ATT_USER         = "utilisateur";
     public static final String ATT_SESSION_USER = "utilisateurSession";
     public static final String ATT_FORM         = "form";
+    public static final String ATT_SESSION_SURVEYS  = "mapSurveys";
+    public static final String ATT_SESSION_SURVEYS_LISTE  = "listSurveys";
+    public static final String ATT_SESSION_SCORES = "mapResultats";
 
     public static final String VUE_SUCCES_ADMIN       = "/WEB-INF/admin/afficherProfilAdmin.jsp";
     public static final String VUE_SUCCES       	  = "/WEB-INF/utilisateur/afficherProfilUtilisateur.jsp";
     public static final String VUE_FORM               = "/WEB-INF/connexion.jsp";
 
     private UtilisateurDao          utilisateurDao;
+    private ResultDao               m_resultDao;
+    private SurveyDao               m_surveyDao;
 
     public void init() throws ServletException {
         /* Récupération d'une instance de notre DAO Utilisateur */
         this.utilisateurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getUtilisateurDao();
+        this.m_resultDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getResultDao();
+        this.m_surveyDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getSurveyDao();
     }
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
@@ -73,10 +84,23 @@ public class Connexion extends HttpServlet {
                 session.setAttribute( ATT_SESSION_USER, null );
             }
         	
-        	
         	if (utilisateur.getAdmin()){
         		this.getServletContext().getRequestDispatcher( VUE_SUCCES_ADMIN ).forward( request, response );
         	}else {
+        		
+        		//Cette partie est pour afficher la partie de Questionnaire dans l'¨¦cran de l'utilisateur.
+        		//J'utilise map pour r¨¦aliser la fonction de renouveler une partie de page.
+        		//Map<Integer,Survey> mapSurveys = m_surveyDao.listerSurvey();
+        		//session.setAttribute( ATT_SESSION_SURVEYS, mapSurveys );
+        		
+        		
+        		//Cette partie est pour afficher la partie de R¨¦sultat dans l'¨¦cran de l'utilisateur.
+        		List<Survey> listSurveys = m_surveyDao.lister();
+        		Map<Long,Resultat>  mapResultats = m_resultDao.listerScore();
+        		
+        		session.setAttribute( ATT_SESSION_SURVEYS_LISTE, listSurveys );
+        		session.setAttribute( ATT_SESSION_SCORES, mapResultats );
+        		
         		this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
         	}
             

@@ -223,7 +223,7 @@ public class AnswerDaoImpl implements AnswerDao
             preparedStatement = PreparedRequestInitialization( connection, sql, false, objects );
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données retournée dans le ResultSet */
-            if ( resultSet.next() ) 
+            while ( resultSet.next() ) 
             {
             	answer = map( resultSet );
             }
@@ -236,7 +236,7 @@ public class AnswerDaoImpl implements AnswerDao
         {
             silentClosures( resultSet, preparedStatement, connection );
         }
-
+        
         return answer;
     }
     
@@ -301,6 +301,8 @@ public class AnswerDaoImpl implements AnswerDao
     {
         Answer answer = new Answer();
         answer.setId(resultSet.getLong("idReponse"));
+        answer.setIdQuestionFK(resultSet.getLong("idQuestionFK"));
+        answer.setIdQuestionnaireFK(resultSet.getLong("idQuestionnaireFK"));
         answer.setText(resultSet.getString("intitule"));
         answer.setOrder(resultSet.getLong("ordre"));
         

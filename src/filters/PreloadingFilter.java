@@ -48,7 +48,7 @@ public class PreloadingFilter implements Filter
 
         /* Récupération de la session depuis la requête */
         HttpSession session = request.getSession();
-
+        
         /*
          * Si la map des clients n'existe pas en session, alors l'utilisateur se
          * connecte pour la première fois et nous devons précharger en session
@@ -66,6 +66,7 @@ public class PreloadingFilter implements Filter
             {
                 mapSurveys.put( survey.getId(), survey );
             }
+            System.out.println(mapSurveys);
             session.setAttribute( ATT_SESSION_SURVEY, mapSurveys );
         }
 

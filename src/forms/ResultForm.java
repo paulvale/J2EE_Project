@@ -42,19 +42,19 @@ public class ResultForm {
     }
     
     
-    public void createResult(List<Answer> reponses){
+    public void createResult(List<Answer> reponses, Long lId_Utilisateur){
     	Answer reponse = new Answer();
     	List<Result> results = new ArrayList<Result>();
     	Result result = new Result();
     	
     	for (int i=0; i < reponses.size(); i++){
     		reponse=reponses.get(i);
-    		m_resultDao.create(reponse);	
+    		m_resultDao.create(reponse, lId_Utilisateur);	
     	}
     	//return results;
     }
     
-    public float calculResultat(List<Answer> reponses, Long lId){
+    public float calculResultat(List<Answer> reponses, Long lId, Long lId_Utilisateur){
     	float total = reponses.size();
     	float correct = 0;
     	float faux    = 0;
@@ -70,7 +70,7 @@ public class ResultForm {
     		}
     	}
     	score=(correct/total);
-    	m_resultDao.conserveScore(score, lId_survey);
+    	m_resultDao.conserveScore(score, lId_survey, lId_Utilisateur);
     	
     	return score;
     }
