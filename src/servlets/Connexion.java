@@ -29,7 +29,7 @@ public class Connexion extends HttpServlet {
     public static final String ATT_SESSION_SURVEYS_LISTE  = "listSurveys";
     public static final String ATT_SESSION_SCORES = "mapResultats";
 
-    public static final String VUE_SUCCES_ADMIN       = "/WEB-INF/admin/afficherProfilAdmin.jsp";
+    public static final String VUE_SUCCES_ADMIN       = "/afficherProfilAdmin";
     public static final String VUE_SUCCES       	  = "/afficherProfilUtilisateur";
     public static final String VUE_FORM               = "/WEB-INF/connexion.jsp";
 
