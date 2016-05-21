@@ -30,7 +30,7 @@ public class Connexion extends HttpServlet {
     public static final String ATT_SESSION_SCORES = "mapResultats";
 
     public static final String VUE_SUCCES_ADMIN       = "/WEB-INF/admin/afficherProfilAdmin.jsp";
-    public static final String VUE_SUCCES       	  = "/WEB-INF/utilisateur/afficherProfilUtilisateur.jsp";
+    public static final String VUE_SUCCES       	  = "/afficherProfilUtilisateur";
     public static final String VUE_FORM               = "/WEB-INF/connexion.jsp";
 
     private UtilisateurDao          utilisateurDao;
@@ -50,11 +50,6 @@ public class Connexion extends HttpServlet {
     }
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException { 
-        /*
-         * Lecture du paramètre 'chemin' passé à la servlet via la déclaration
-         * dans le web.xml
-         */
-        //String chemin = this.getServletConfig().getInitParameter( CHEMIN );
 
         /* Préparation de l'objet formulaire */
         ConnexionForm form = new ConnexionForm(utilisateurDao);
@@ -85,7 +80,8 @@ public class Connexion extends HttpServlet {
             }
         	
         	if (utilisateur.getAdmin()){
-        		this.getServletContext().getRequestDispatcher( VUE_SUCCES_ADMIN ).forward( request, response );
+        		response.sendRedirect( request.getContextPath() + VUE_SUCCES_ADMIN);
+        		//this.getServletContext().getRequestDispatcher( VUE_SUCCES_ADMIN ).forward( request, response );
         	}else {        		
         		//Cette partie est pour afficher la partie de Résultat dans l'écran de l'utilisateur.
         		List<Survey> listSurveys = m_surveyDao.lister();
@@ -94,7 +90,8 @@ public class Connexion extends HttpServlet {
         		session.setAttribute( ATT_SESSION_SURVEYS_LISTE, listSurveys );
         		session.setAttribute( ATT_SESSION_SCORES, mapResultats );
         		
-        		this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
+        		//this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
+        		response.sendRedirect( request.getContextPath() + VUE_SUCCES);
         	}
             
         } else {

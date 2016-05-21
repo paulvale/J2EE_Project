@@ -99,10 +99,13 @@
     </servlet>
 
 	<servlet>
+        <servlet-name>AfficherProfilUtilisateur</servlet-name>
+        <servlet-class>servlets.AfficherProfilUtilisateur</servlet-class>
+    </servlet>
+	<servlet>
         <servlet-name>QuestionnaireDisplay</servlet-name>
         <servlet-class>servlets.QuestionnaireDisplay</servlet-class>
     </servlet>
-
     <servlet>
         <servlet-name>QuestionnaireResult</servlet-name>
         <servlet-class>servlets.QuestionnaireResult</servlet-class>
@@ -203,11 +206,14 @@
         <url-pattern>/answerDeletion</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>AfficherProfilUtilisateur</servlet-name>
+        <url-pattern>/afficherProfilUtilisateur</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>  
     	<servlet-name>QuestionnaireDisplay</servlet-name>  
     	<url-pattern>/questionnaireDisplay</url-pattern>
     </servlet-mapping> 
-
     <servlet-mapping>
     	<servlet-name>QuestionnaireResult</servlet-name>
     	<url-pattern>/questionnaireResult</url-pattern>
