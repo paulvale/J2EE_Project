@@ -30,7 +30,7 @@
                     <%-- Affichage des propriétés du bean Client, qui est stocké en tant que valeur de l'entrée courante de la map --%>
                     <td><c:out value="${ varScore.id }"/></td>
                     <td><c:out value="${ varScore.idQuestionnaire }"/></td>
-                    <td><c:out value="${ varScore.score }"/></td>
+                    <td><c:out value="${ varScore.score }%"/></td>
                 </tr>
                 </c:forEach>
             </table>

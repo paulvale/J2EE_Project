@@ -14,5 +14,5 @@ public interface ResultDao {
 	void conserveScore(float score, Long lId, Long lId_Utilisateur) throws DAOException;
     
 	//C'est pour trouver tous les scores de questionnaires que l'utilisateur est d®®j®§ finit.
-    public List<Resultat> listerScore() throws DAOException;
+    public List<Resultat> listerScore(Long lId_Utilisateur) throws DAOException;
 }

@@ -69,7 +69,7 @@ public class ResultForm {
     			faux=faux+1;
     		}
     	}
-    	score=(correct/total);
+    	score=(correct/total)*100;
     	m_resultDao.conserveScore(score, lId_survey, lId_Utilisateur);
     	
     	return score;

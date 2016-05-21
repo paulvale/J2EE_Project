@@ -29,7 +29,7 @@ public class QuestionnaireResult extends HttpServlet {
 	
 	public static final String CONF_DAO_FACTORY      	= "daofactory";
 	public static final String ATT      	            = "test";
-	public static final String VIEW      	            = "/WEB-INF/utilisateur/afficherProfilUtilisateur.jsp";
+	public static final String VIEW      	            = "/afficherScore";
 	public static final String QUESTIONS_SESSION     	= "questions";
 	public static final String ATTRIBUTESURVEY          = "survey";
 	public static final String ATTRIBUTELISTE           = "liste";
@@ -79,7 +79,7 @@ public class QuestionnaireResult extends HttpServlet {
         
         Long lId = reponses.get(0).getIdQuestionnaireFK();
         score=form.calculResultat(reponses,lId, lId_Utilisateur);
-        
-		this.getServletContext().getRequestDispatcher( VIEW ).forward( request, response );		
+
+		response.sendRedirect( request.getContextPath() + VIEW);
 	}
 }

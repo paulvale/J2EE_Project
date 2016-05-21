@@ -2,6 +2,7 @@ package dao;
 
 import static dao.DAOUtility.silentClosures;
 import static dao.DAOUtilitaire.fermeturesSilencieuses;
+import static dao.DAOUtilitaire.initialisationRequetePreparee;
 import static dao.DAOUtility.PreparedRequestInitialization;
 
 import java.sql.Connection;
@@ -19,6 +20,7 @@ import beans.Answer;
 import beans.Result;
 import beans.Resultat;
 import beans.Survey;
+import beans.Utilisateur;
 
 public class ResultDaoImpl implements ResultDao {
 	
@@ -27,7 +29,7 @@ public class ResultDaoImpl implements ResultDao {
 	
 	private static final String SQL_INSERT                  = "INSERT INTO result (idUser,idQuestionnaire, idQuestion, intitule, ordre, actif, valide) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private static final String SQL_INSERT_RESULTAT         = "INSERT INTO score  (idUser, idQuestionnaire, score) VALUES (?, ?, ?)";
-	private static final String SQL_SELECT_SCORE            = "SELECT *    FROM   score ORDER BY  idScore";
+	private static final String SQL_SELECT_SCORE            = "SELECT *    FROM   score WHERE idUser = ? ORDER BY  idScore";
 	
 	private DAOFactory daoFactory;
 
@@ -103,7 +105,7 @@ public class ResultDaoImpl implements ResultDao {
         }
     }
 	
-	 public List<Resultat> listerScore() throws DAOException {
+	 public List<Resultat> listerScore(Long lId_Utilisateur) throws DAOException {
 	        Connection connection = null;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet resultSet = null;
@@ -111,11 +113,12 @@ public class ResultDaoImpl implements ResultDao {
 
 	        try {
 	            connection = daoFactory.getConnection();
-	            preparedStatement = connection.prepareStatement( SQL_SELECT_SCORE );
+	            preparedStatement = initialisationRequetePreparee( connection, SQL_SELECT_SCORE,false, lId_Utilisateur);
 	            resultSet = preparedStatement.executeQuery();
-	            while ( resultSet.next() ) {	
-	            	resultats.add( map( resultSet ) );
+	            while ( resultSet.next() ) {
+	                resultats.add( map( resultSet ) );
 	            }
+	            
 	        } catch ( SQLException e ) {
 	            throw new DAOException( e );
 	        } finally {

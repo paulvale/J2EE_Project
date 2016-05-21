@@ -85,7 +85,7 @@ public class Connexion extends HttpServlet {
         	}else {        		
         		//Cette partie est pour afficher la partie de Résultat dans l'écran de l'utilisateur.
         		List<Survey> listSurveys = m_surveyDao.lister();
-        		List<Resultat>  mapResultats = m_resultDao.listerScore();
+        		List<Resultat>  mapResultats = m_resultDao.listerScore(utilisateur.getId());
         		
         		session.setAttribute( ATT_SESSION_SURVEYS_LISTE, listSurveys );
         		session.setAttribute( ATT_SESSION_SCORES, mapResultats );
