@@ -7,10 +7,6 @@ import javafx.util.Pair;
 
 import org.joda.time.DateTime;
 
-
-
-
-
 public class Question 
 {
 	private Long 	m_lId;

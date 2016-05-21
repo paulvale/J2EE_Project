@@ -40,13 +40,15 @@
 				<h2>Les résultats de vos questionnaires.</h2>
 				<table border="1">
 				  <tr>
-				  	<td width="100pt"><b>Questionnaire</b></td>
+				  	<td width="100pt"><b>Id</b></td>
+				  	<td width="100pt"><b>Sujet</b></td>
 				  	<td width="100pt"><b>Résultat</b></td>
 				  </tr>
-				  <c:forEach items="${sessionScope.listSurveys}" var="listSurvey" varStatus="loop">
+				  <c:forEach items="${sessionScope.mapResultats}" var="mapResultat" varStatus="loop">
 				      <tr>
-				          <td><c:out value="${listSurvey.id}"/><c:out value="${listSurvey.subject}"/></td>
-				          <td><c:out value="${sessionScope.mapResultats[listSurvey.id].score}"/></td>
+				          <td><c:out value="${mapResultat.getId()}"/></td>
+				          <td><c:out value="${mapResultat.getIdQuestionnaire()}"/></td>
+				          <td><c:out value="${mapResultat.getScore()}"/></td>
 				      </tr>
 				  </c:forEach>
 				  

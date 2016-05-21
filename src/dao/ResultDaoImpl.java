@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.joda.time.DateTime;
@@ -101,18 +103,18 @@ public class ResultDaoImpl implements ResultDao {
         }
     }
 	
-	 public Map<Long,Resultat> listerScore() throws DAOException {
+	 public List<Resultat> listerScore() throws DAOException {
 	        Connection connection = null;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet resultSet = null;
-	        Map<Long,Resultat> resultats = new HashMap<Long,Resultat>();
+	        List<Resultat> resultats = new ArrayList<Resultat>();
 
 	        try {
 	            connection = daoFactory.getConnection();
 	            preparedStatement = connection.prepareStatement( SQL_SELECT_SCORE );
 	            resultSet = preparedStatement.executeQuery();
 	            while ( resultSet.next() ) {	
-	            	resultats.put( resultSet.getLong("idScore"),map( resultSet ) );
+	            	resultats.add( map( resultSet ) );
 	            }
 	        } catch ( SQLException e ) {
 	            throw new DAOException( e );
@@ -127,6 +129,8 @@ public class ResultDaoImpl implements ResultDao {
 		 Resultat resultat = new Resultat();
 	     resultat.setId(resultSet.getLong("idScore"));
 	     resultat.setScore(resultSet.getFloat("score"));
+	     resultat.setIdUser(resultSet.getLong("idUser"));
+	     resultat.setIdQuestionnaire(resultSet.getLong("idQuestionnaire"));
 	     return resultat;
 	 }
 }

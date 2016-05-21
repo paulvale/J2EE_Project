@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.List;
 import java.util.Map;
 
 import beans.Answer;
@@ -13,5 +14,5 @@ public interface ResultDao {
 	void conserveScore(float score, Long lId, Long lId_Utilisateur) throws DAOException;
     
 	//C'est pour trouver tous les scores de questionnaires que l'utilisateur est d®®j®§ finit.
-    public Map<Long,Resultat> listerScore() throws DAOException;
+    public List<Resultat> listerScore() throws DAOException;
 }

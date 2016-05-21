@@ -86,17 +86,10 @@ public class Connexion extends HttpServlet {
         	
         	if (utilisateur.getAdmin()){
         		this.getServletContext().getRequestDispatcher( VUE_SUCCES_ADMIN ).forward( request, response );
-        	}else {
-        		
-        		//Cette partie est pour afficher la partie de Questionnaire dans l'¨¦cran de l'utilisateur.
-        		//J'utilise map pour r¨¦aliser la fonction de renouveler une partie de page.
-        		//Map<Integer,Survey> mapSurveys = m_surveyDao.listerSurvey();
-        		//session.setAttribute( ATT_SESSION_SURVEYS, mapSurveys );
-        		
-        		
-        		//Cette partie est pour afficher la partie de R¨¦sultat dans l'¨¦cran de l'utilisateur.
+        	}else {        		
+        		//Cette partie est pour afficher la partie de Résultat dans l'écran de l'utilisateur.
         		List<Survey> listSurveys = m_surveyDao.lister();
-        		Map<Long,Resultat>  mapResultats = m_resultDao.listerScore();
+        		List<Resultat>  mapResultats = m_resultDao.listerScore();
         		
         		session.setAttribute( ATT_SESSION_SURVEYS_LISTE, listSurveys );
         		session.setAttribute( ATT_SESSION_SCORES, mapResultats );

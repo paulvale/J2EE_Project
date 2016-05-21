@@ -66,7 +66,6 @@ public class PreloadingFilter implements Filter
             {
                 mapSurveys.put( survey.getId(), survey );
             }
-            System.out.println(mapSurveys);
             session.setAttribute( ATT_SESSION_SURVEY, mapSurveys );
         }
 
