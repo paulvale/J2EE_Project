@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>ListerUtilisateurs</servlet-name>
-    <servlet-class>servlets.ListerUtilisateurs</servlet-class>
+    	<servlet-class>servlets.ListerUtilisateurs</servlet-class>
     </servlet>
         <servlet>
         <servlet-name>SuppressionUtilisateur</servlet-name>
@@ -109,6 +109,10 @@
     <servlet>
         <servlet-name>QuestionnaireResult</servlet-name>
         <servlet-class>servlets.QuestionnaireResult</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListerQuestionnairesUtilisateur</servlet-name>
+    	<servlet-class>servlets.ListerQuestionnairesUtilisateur</servlet-class>
     </servlet>
     
 
@@ -210,6 +214,10 @@
         <servlet-name>AfficherProfilUtilisateur</servlet-name>
         <url-pattern>/afficherProfilUtilisateur</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>ListerQuestionnairesUtilisateur</servlet-name>
+    	<url-pattern>/listerQuestionnairesUtilisateur</url-pattern>
+	</servlet-mapping>
     <servlet-mapping>  
     	<servlet-name>QuestionnaireDisplay</servlet-name>  
     	<url-pattern>/questionnaireDisplay</url-pattern>
