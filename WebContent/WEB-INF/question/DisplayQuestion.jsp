@@ -17,7 +17,16 @@
             	<p>Identifiant de la question : <c:out value="${ question.id }"/></p>
             	<p>Initulé de la question : <c:out value="${ question.text }"/></p>
                 <p>Sujet du questionnaire associé : <c:out value="${ question.survey.subject }"/></p>
-                <p>Statut : <c:out value="${ question.active }"/></p>
+                <p>Active :
+	                <c:choose>
+				    	<c:when test="${question.active == 'active'}">
+				    		<img src="<c:url value="/inc/actif.png"/>" alt="Actif" />
+				    	</c:when>
+				    	<c:otherwise>
+				    		<img src="<c:url value="/inc/inactif.png"/>" alt="Inactif" />
+				    	</c:otherwise>
+					</c:choose>
+                </p>
                 <p>Ordre d'apparition dans le questionnaire : <c:out value="${ question.order }"/></p>
                 <div id="body">
 			        <c:choose>
@@ -32,9 +41,11 @@
 			                <tr>
 			                    <th>Intitulé</th>
 			                    <th>Ordre d'apparition</th>
-			                    <th>Statut</th>
-			                    <th>Validité</th>
-			                    <th class="action">Action</th>                    
+			                    <th>Actif</th>
+			                    <th>Valide</th>
+			                    <th class="action">Modifier</th>
+			                    <th class="action">Supprimer</th>
+			                    <th class="action">Informations</th>                       
 			                </tr>
 			                <%-- Parcours de la Map des questionnaires en session, et utilisation de l'objet varStatus. --%>
 			                <c:forEach items="${ sessionScope.answers }" var="listAnswers" varStatus="loop">
@@ -44,19 +55,44 @@
 			                    
 			                    <%-- Lien vers la servlet de suppression, avec passage l'id de la question - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
 			                    <td>
-			                    	<a href="<c:url value="/answerDisplay"><c:param name="idAnswer" value="${ listAnswers.id }" /></c:url>"><c:out value="${ listAnswers.text }"/> </a>
+			                    	<c:out value="${listAnswers.text }" />
 			                    </td>
 			                    <td>
 			                    	<c:out value="${ listAnswers.order }"/>
 			                    </td>
-			                    <td><c:out value="${ listAnswers.active }"/></td>
-			                    <td><c:out value="${ listAnswers.valide }"/></td>
+			                    <td>
+				                    <c:choose>
+								    	<c:when test="${listAnswers.active == 'active'}">
+								    		<img src="<c:url value="/inc/actif.png"/>" alt="Actif" />
+								    	</c:when>
+								    	<c:otherwise>
+								    		<img src="<c:url value="/inc/inactif.png"/>" alt="Inactif" />
+								    	</c:otherwise>
+									</c:choose>
+			                    </td>
+			                    <td>
+				                    <c:choose>
+								    	<c:when test="${listAnswers.valide == 'valide'}">
+								    		<img src="<c:url value="/inc/actif.png"/>" alt="Actif" />
+								    	</c:when>
+								    	<c:otherwise>
+								    		<img src="<c:url value="/inc/inactif.png"/>" alt="Inactif" />
+								    	</c:otherwise>
+									</c:choose>
+			                    </td>
 			                    <td class="action">
 			                    	<a href="<c:url value="/answerModification"><c:param name="idAnswer" value="${ listAnswers.id }" /><c:param name="idQuestion" value="${ listAnswers.question.id }" /></c:url>">
-			                            <img src="<c:url value="/inc/edit.gif"/>" alt="Modifier" />
+			                            <img src="<c:url value="/inc/modifier.png"/>" alt="Modifier" />
 			                        </a>
+			                    </td>
+			                    <td class="action">
 			                        <a href="<c:url value="/answerDeletion"><c:param name="idAnswer" value="${ listAnswers.id }" /><c:param name="idQuestion" value="${ listAnswers.question.id }" /></c:url>">
 			                            <img src="<c:url value="/inc/supprimer.png"/>" alt="Supprimer" />
+			                        </a>
+			                    </td>
+			                    <td class="action">
+			                        <a href="<c:url value="/answerDisplay"><c:param name="idAnswer" value="${ listAnswers.id }" /></c:url>">
+			                            <img src="<c:url value="/inc/info.png"/>" alt="Info" />
 			                        </a>
 			                    </td>
 			                </tr>

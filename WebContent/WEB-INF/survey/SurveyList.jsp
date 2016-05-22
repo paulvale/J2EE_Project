@@ -21,8 +21,10 @@
             <table>
                 <tr>
                     <th>Sujet</th>
-                    <th>Statut</th>
-                    <th class="action">Action</th>                    
+                    <th>Actif</th>
+                    <th class="action">Modifier</th> 
+                    <th class="action">Supprimer</th>
+                    <th class="action">Informations</th>                           
                 </tr>
                 <%-- Parcours de la Map des questionnaires en session, et utilisation de l'objet varStatus. --%>
                 <c:forEach items="${ sessionScope.surveys }" var="mapSurveys" varStatus="loop">
@@ -30,17 +32,34 @@
                 <tr class="${loop.index % 2 == 0 ? 'pair' : 'impair'}">
                     <%-- Affichage des propriétés du bean Survey, qui est stocké en tant que valeur de l'entrée courante de la map --%>
                     <td>
-                    	<a href="<c:url value="/surveyDisplay"><c:param name="idParameter" value="${ mapSurveys.key }" /></c:url>"><c:out value="${ mapSurveys.value.subject }"/> </a>
+                    	<c:out value="${ mapSurveys.value.subject }"/>
                     </td>
-                    <td><c:out value="${ mapSurveys.value.active }"/></td>
+                    
+                    <td>
+                    	<c:choose>
+					    	<c:when test="${mapSurveys.value.active == 'active'}">
+					    		<img src="<c:url value="/inc/actif.png"/>" alt="Actif" />
+					    	</c:when>
+					    	<c:otherwise>
+					    		<img src="<c:url value="/inc/inactif.png"/>" alt="Inactif" />
+					    	</c:otherwise>
+						</c:choose>
+                    </td>
                     <%-- Lien vers la servlet de suppression, avec passage du sujet du questionnaire - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
                     <td class="action">
                     	<a href="<c:url value="/surveyModification"><c:param name="idParameter" value="${ mapSurveys.key }" /></c:url>">
-                            <img src="<c:url value="/inc/edit.gif"/>" alt="Modifier" />
+                            <img src="<c:url value="/inc/modifier.png"/>" alt="Modifier" />
                         </a>
+                    </td>
+                    <td class="action">
                         <a href="<c:url value="/surveyDeletion"><c:param name="idSurvey" value="${ mapSurveys.key }" /></c:url>">
                             <img src="<c:url value="/inc/supprimer.png"/>" alt="Supprimer" />
                         </a>
+                    </td>
+                    <td class="action">
+                    	<a href="<c:url value="/surveyDisplay"><c:param name="idParameter" value="${ mapSurveys.key }" /></c:url>">
+							 <img src="<c:url value="/inc/info.png"/>" alt="Info" />
+                    	</a>
                     </td>
                 </tr>
                 </c:forEach>

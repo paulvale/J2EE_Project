@@ -17,7 +17,16 @@
             	<p>Identifiant de la réponse : <c:out value="${ answer.id }"/></p>
                 <p>Intitulé de la réponse : <c:out value="${ answer.text }"/></p>
                 <p>Intitulé de la question associée : <c:out value="${ answer.question.text }"/></p>
-                <p>Statut : <c:out value="${ answer.active }"/></p>
+                <p>Active :
+                	<c:choose>
+				    	<c:when test="${mapSurveys.value.active == 'active'}">
+				    		<img src="<c:url value="/inc/actif.png"/>" alt="Actif" />
+				    	</c:when>
+				    	<c:otherwise>
+				    		<img src="<c:url value="/inc/inactif.png"/>" alt="Inactif" />
+				    	</c:otherwise>
+					</c:choose>
+                </p>
                 <p>Validité : <c:out value="${ answer.valide }"/></p>
                 <p>Ordre d'apparition dans la question : <c:out value="${ answer.order }"/></p>
             </c:if>
